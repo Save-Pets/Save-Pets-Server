@@ -1,4 +1,7 @@
 package capstone.project.domain.repository;
 
-public class GalleryRepository {
+import capstone.project.domain.entity.GalleryEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GalleryRepository extends JpaRepository<GalleryEntity, Long> {
 }
