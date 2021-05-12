@@ -35,22 +35,26 @@ def register():
         # imgs = files.to_dict(flat=False)['filename[]']
     reg_num = uniquenumber()
 
-    createFolder('./ML/Save-Pets-ML/SVM-Classifier/image/%s' %(reg_num))
+    print(os.getcwd())
+
+    os.chdir('./ML/Save-Pets-ML/SVM-Classifier/image/')
+    createFolder('./%s' %(reg_num))
 
     #이미지 5장, key = filename[] 저장 for preprocess
     for index,f in enumerate (files.to_dict(flat=False)['filename[]']):
-        f.save('./ML/Save-Pets-ML/SVM-Classifier/image/%s/' % (reg_num) + str(index)+'.jpg')
+        f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
-    os.chdir('./ML/Save-Pets-ML/SVM-Classifier/')
+    os.chdir('../')
     os.system('python preprocess.py --dir %s' %(reg_num))
-    print(os.getcwd())
+    # print(os.getcwd())
 
     #5장 중에 첫번째 장 사진 복사 -> 조회
     source ='./image/%s/0.jpg' %(reg_num)
-
     destination = './Dog-Data/test/%s.jpg' %(reg_num)
     shutil.copyfile(source, destination)
+
+    # print(os.getcwd())
 
     # 등록된 강아지인지 조회
     os.system('python Classifier.py --test %s.jpg' %(reg_num))
@@ -130,8 +134,9 @@ def uniquenumber():
 @app.route('/lookup', methods=['GET', 'POST'])
 def lookup():
     if request.method == 'POST':
-        files = request.files
-        
+        files = request.files['img']
+        # files.save('./Dog-Data/test/')
+        print(os.getcwd())
 
     return jsonify({'message':'success'})
 
