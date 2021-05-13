@@ -135,9 +135,11 @@ def uniquenumber():
 def lookup():
     if request.method == 'POST':
         files = request.files['img']
-        # files.save('./Dog-Data/test/')
         print(os.getcwd())
-
+        files.save('./ML/Save-Pets-ML/SVM-Classifier/Dog-Data/test/'+files.filename)
+        os.chdir('./ML/Save-Pets-ML/SVM-Classifier/')
+        print(os.getcwd())
+        os.system('python Classifier.py --test %s' % (files.filename))
     return jsonify({'message':'success'})
 
 
