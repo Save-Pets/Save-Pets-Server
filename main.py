@@ -23,14 +23,14 @@ def db_connector():
 #중복없이 reg_num 생성
 alist=[]
 
-# files = request.files
 # [등록 API]
 # 이미지,정보 -> 이미지 서버에 저장 후 return 파싱된 정보, 등록번호
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        files = request.files
-        details = request.form
+        files= request.files
+        global details
+        details= request.form
         profile = request.files['profile']
         # imgs = files.to_dict(flat=False)['filename[]']
     reg_num = uniquenumber()
@@ -111,6 +111,7 @@ def register():
         return jsonify({'data': [{'반려견': details['반려견'], '등록번호': reg_num}], 'message': 'success'})
 
 
+
 def createFolder(directory):
     try:
         if not os.path.exists(directory):
@@ -125,7 +126,9 @@ def uniquenumber():
         while a in alist:
             a = random.randint(1, 100)
     alist.append(a)
-    reg_num = int(str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a))
+    unique = details['반려견'][0] + str(details['연락처'][7:11])
+    print(unique)
+    reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a)+unique)
     return reg_num
 
 
@@ -142,6 +145,10 @@ def lookup():
         os.system('python Classifier.py --test %s' % (files.filename))
     return jsonify({'message':'success'})
 
+# #error handler
+# @app.errorhandler(400)
+# def badRequest(error):
+#     return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
     app.run(debug=True)
