@@ -67,8 +67,10 @@ def register():
     # compare = result.decode('utf-8')
     # print(compare[1])
     # print(result)
-    if compare[1] == '등록된강아지':
-        return jsonify({'message':'이미 등록된 강아지입니다.'})
+
+    ##등록된 강아지 예외처리
+    # if compare[1] == '등록된강아지':
+    #     return jsonify({'message':'이미 등록된 강아지입니다.'})
 
     db = db_connector()
     cursor = db.cursor()
@@ -100,25 +102,48 @@ def register():
 
     #새로운 유저
     else:
+        #registerant table에 insert
         reg_sql = "INSERT INTO registerant (regname,regphone,regemail) VALUES(%s,%s,%s)"
         val = (details['반려인'], details['연락처'], details['이메일'])
 
         cursor.execute(reg_sql, val)
+
+        #primarykey
         pk = "select id from registerant WHERE regphone='%s'" %(phone)
         cursor.execute(pk)
         rows = cursor.fetchone()
+
         # 등록번호 생성
         reg_num = uniquenumber()
+
+        #pet table에 insert
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
         val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, rows,reg_num)
 
         cursor.execute(pet_sql, val1)
 
+        #가장 최근 insert id 불러오기
+        reg_send="SELECT last_insert_id();"
+        cursor.execute(reg_send)
+        latestid = cursor.fetchone()
+
+        #db등록 정보 가져오기
+        fetchDB="SELECT * FROM pet WHERE id ='%s'" %(latestid[0])
+        cursor.execute(fetchDB)
+        all = cursor.fetchall()
+        print(all)
+        petname = all[0][1]
+        petbirth= all[0][3]
+        petgender=all[0][4]
+        petprofile=all[0][5]
+        petnumber=all[0][7]
+
         db.commit()
 
         cursor.close()
 
-        return jsonify({'data': [{'반려견': details['반려견'], '등록번호': reg_num}], 'message': 'success'})
+        return jsonify({'data': [{'반려견': petname, '등록번호': petnumber,
+                                  '반려견태어난해':petbirth,'반려견성별':petgender,'프로필이미지':petprofile}], 'message': 'success'})
 
 
 def createFolder(directory):
@@ -164,7 +189,7 @@ def lookup():
         cursor = db.cursor()
 
         if SVMresult[1] =='미등록강아지':
-            return jsonify({'data':'success','message':'조회된 비문이 없습니다'})
+            return jsonify({'data':'조회된 비문이 없습니다','message':'success'})
         else :
             foundDog=SVMresult[0]
             accurancy=SVMresult[2]
