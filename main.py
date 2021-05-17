@@ -73,16 +73,17 @@ def register():
         cursor.execute(pk)
         pk1 = cursor.fetchone()
 
-        pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id) VALUES(%s,%s,%s,%s,%s,%s)"
-        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, pk1)
+        # 등록번호 생성
+        reg_num = uniquenumber()
+
+        pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, pk1,reg_num)
 
         cursor.execute(pet_sql, val1)
 
         db.commit()
         cursor.close()
 
-        # 등록번호 생성
-        reg_num = uniquenumber()
 
         return jsonify({'data': [{'반려견': details['반려견'], '등록번호': reg_num}], 'message': 'success'})
 
@@ -95,9 +96,10 @@ def register():
         pk = "select id from registerant WHERE regphone='%s'" %(phone)
         cursor.execute(pk)
         rows = cursor.fetchone()
-
-        pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id) VALUES(%s,%s,%s,%s,%s,%s)"
-        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, rows)
+        # 등록번호 생성
+        reg_num = uniquenumber()
+        pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, rows,reg_num)
 
         cursor.execute(pet_sql, val1)
 
@@ -105,11 +107,7 @@ def register():
 
         cursor.close()
 
-        # 등록번호 생성
-        reg_num = uniquenumber()
-
         return jsonify({'data': [{'반려견': details['반려견'], '등록번호': reg_num}], 'message': 'success'})
-
 
 
 def createFolder(directory):
@@ -143,12 +141,14 @@ def lookup():
         os.chdir('./ML/Save-Pets-ML/SVM-Classifier/')
         print(os.getcwd())
         os.system('python Classifier.py --test %s' % (files.filename))
+
+
     return jsonify({'message':'success'})
 
-# #error handler
-# @app.errorhandler(400)
-# def badRequest(error):
-#     return jsonify({'message':'fail'})
+#error handler
+@app.errorhandler(400)
+def badRequest(error):
+    return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
     app.run(debug=True)
