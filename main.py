@@ -156,16 +156,42 @@ def lookup():
         # os.system('python Classifier.py --test %s' % (lookupimg.filename))
 
         result= getSVMResult()
-        print(result.decode('utf-8'))
+        SVMresult = result.decode('utf-8').split(',')
 
-        if result[2] =='미등록강아지':
-            return jsonify({'data':'success' ,'message':'조회된 비문이 없습니다'})
+        print(SVMresult[0])
 
+        db = db_connector()
+        cursor = db.cursor()
+
+        if SVMresult[1] =='미등록강아지':
+            return jsonify({'data':'success','message':'조회된 비문이 없습니다'})
         else :
-            foundpoppy=result[0]
-            accurancy=result[3]
-            # lookup_sql = "select id from pet WHERE uniquenumber = '%s'" %(phone)"
-            return jsonify()
+            foundDog=SVMresult[0]
+            accurancy=SVMresult[2]
+            lookup_sql = "SELECT reg_id FROM pet WHERE uniquenumber='%s'" %(foundDog)
+            cursor.execute(lookup_sql)
+            rows = cursor.fetchone()
+            # print(rows)
+            registerData_sql="SELECT * FROM registerant WHERE id='%s'" %(rows)
+            cursor.execute(registerData_sql)
+
+            datas = cursor.fetchall()
+            print(datas)
+            registername=datas[0][1]
+            registerphone=datas[0][2]
+            registeremail=datas[0][3]
+
+            # for index,data in datas:
+            #     if index == 1:
+            #         registername=data
+            #     elif index==2:
+            #         registerphone=data
+            #     else:
+            #         registeremail=data
+            db.commit()
+
+            return jsonify({'data':[{'등록번호':foundDog,'등록자이름':registername,'등록자연락처':registerphone,'등록자이메일':registeremail,'일치율':accurancy}],
+            'message':'success'})
 
     # return jsonify({'message':'success'})
 
