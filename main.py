@@ -94,11 +94,30 @@ def register():
 
         cursor.execute(pet_sql, val1)
 
+
+        # 가장 최근 insert id 불러오기
+        reg_send = "SELECT last_insert_id();"
+        cursor.execute(reg_send)
+        latestid = cursor.fetchone()
+
+        # db등록 정보 가져오기
+        fetchDB = "SELECT * FROM pet WHERE id ='%s'" % (latestid[0])
+        cursor.execute(fetchDB)
+        all = cursor.fetchall()
+        # print(all)
+        petname = all[0][1]
+        petbirth = all[0][3]
+        petgender = all[0][4]
+        petprofile = all[0][5]
+        petnumber = all[0][7]
+
         db.commit()
+
         cursor.close()
 
-
-        return jsonify({'data': [{'반려견': details['반려견'], '등록번호': reg_num}], 'message': 'success'})
+        return jsonify({'data': [{'반려견': petname, '등록번호': petnumber,
+                                  '반려견태어난해': petbirth, '반려견성별': petgender, '프로필이미지': petprofile}],
+                        'message': 'success'})
 
     #새로운 유저
     else:
@@ -123,27 +142,27 @@ def register():
         cursor.execute(pet_sql, val1)
 
         #가장 최근 insert id 불러오기
-        reg_send="SELECT last_insert_id();"
-        cursor.execute(reg_send)
-        latestid = cursor.fetchone()
+        new_reg_send="SELECT last_insert_id();"
+        cursor.execute(new_reg_send)
+        new_latestid = cursor.fetchone()
 
         #db등록 정보 가져오기
-        fetchDB="SELECT * FROM pet WHERE id ='%s'" %(latestid[0])
-        cursor.execute(fetchDB)
-        all = cursor.fetchall()
-        print(all)
-        petname = all[0][1]
-        petbirth= all[0][3]
-        petgender=all[0][4]
-        petprofile=all[0][5]
-        petnumber=all[0][7]
+        new_fetchDB="SELECT * FROM pet WHERE id ='%s'" %(new_latestid[0])
+        cursor.execute(new_fetchDB)
+        new_all = cursor.fetchall()
+        # print(new_all)
+        new_petname = all[0][1]
+        new_petbirth= all[0][3]
+        new_petgender=all[0][4]
+        new_petprofile=all[0][5]
+        new_petnumber=all[0][7]
 
         db.commit()
 
         cursor.close()
 
-        return jsonify({'data': [{'반려견': petname, '등록번호': petnumber,
-                                  '반려견태어난해':petbirth,'반려견성별':petgender,'프로필이미지':petprofile}], 'message': 'success'})
+        return jsonify({'data': [{'반려견': new_petname, '등록번호': new_petnumber,
+                                  '반려견태어난해':new_petbirth,'반려견성별':new_petgender,'프로필이미지':new_petprofile}], 'message': 'success'})
 
 
 def createFolder(directory):
@@ -183,7 +202,7 @@ def lookup():
         result= getSVMResult()
         SVMresult = result.decode('utf-8').split(',')
 
-        print(SVMresult[0])
+        # print(SVMresult[0])
 
         db = db_connector()
         cursor = db.cursor()
@@ -201,7 +220,7 @@ def lookup():
             cursor.execute(registerData_sql)
 
             datas = cursor.fetchall()
-            print(datas)
+            # print(datas)
             registername=datas[0][1]
             registerphone=datas[0][2]
             registeremail=datas[0][3]
