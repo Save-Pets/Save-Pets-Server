@@ -1,7 +1,7 @@
 import datetime
 import os
 import random
-
+import subprocess
 import pymysql
 import json
 import shutil
@@ -33,9 +33,10 @@ def register():
         details= request.form
         profile = request.files['profile']
         # imgs = files.to_dict(flat=False)['filename[]']
-    reg_num = uniquenumber()
+    global reg_num
+    reg_num= uniquenumber()
 
-    print(os.getcwd())
+    # print(os.getcwd())
 
     os.chdir('./ML/Save-Pets-ML/SVM-Classifier/image/')
     createFolder('./%s' %(reg_num))
@@ -57,7 +58,17 @@ def register():
     # print(os.getcwd())
 
     # 등록된 강아지인지 조회
-    os.system('python Classifier.py --test %s.jpg' %(reg_num))
+    # os.system('python Classifier.py --test %s.jpg' %(reg_num))
+
+    result = getSVMResultForRegister()
+    print(result.decode('utf-8').split(','))
+    compare = result.decode('utf-8').split(',')
+
+    # compare = result.decode('utf-8')
+    # print(compare[1])
+    # print(result)
+    if compare[1] == '등록된강아지':
+        return jsonify({'message':'이미 등록된 강아지입니다.'})
 
     db = db_connector()
     cursor = db.cursor()
@@ -125,7 +136,7 @@ def uniquenumber():
             a = random.randint(1, 100)
     alist.append(a)
     unique = details['반려견'][0] + str(details['연락처'][7:11])
-    print(unique)
+    # print(unique)
     reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a)+unique)
     return reg_num
 
@@ -135,15 +146,44 @@ def uniquenumber():
 @app.route('/lookup', methods=['GET', 'POST'])
 def lookup():
     if request.method == 'POST':
-        files = request.files['img']
-        print(os.getcwd())
-        files.save('./ML/Save-Pets-ML/SVM-Classifier/Dog-Data/test/'+files.filename)
+        global lookupimg
+        lookupimg= request.files['img']
+        # print(os.getcwd())
+        lookupimg.save('./ML/Save-Pets-ML/SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
         os.chdir('./ML/Save-Pets-ML/SVM-Classifier/')
-        print(os.getcwd())
-        os.system('python Classifier.py --test %s' % (files.filename))
+        # print(os.getcwd())
+
+        # os.system('python Classifier.py --test %s' % (lookupimg.filename))
+
+        result= getSVMResult()
+        print(result.decode('utf-8'))
+
+        if result[2] =='미등록강아지':
+            return jsonify({'data':'success' ,'message':'조회된 비문이 없습니다'})
+
+        else :
+            foundpoppy=result[0]
+            accurancy=result[3]
+            # lookup_sql = "select id from pet WHERE uniquenumber = '%s'" %(phone)"
+            return jsonify()
+
+    # return jsonify({'message':'success'})
+
+def getSVMResult():
+    cmd =['python','Classifier.py','--test','%s' %(lookupimg.filename)]
+    fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
+    data = fd_popen.read().strip()
+    fd_popen.close()
+    return data
+
+def getSVMResultForRegister():
+    cmd =['python','Classifier.py','--test','%s.jpg' %(reg_num)]
+    fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
+    data = fd_popen.read().strip()
+    fd_popen.close()
+    return data
 
 
-    return jsonify({'message':'success'})
 
 #error handler
 @app.errorhandler(400)
