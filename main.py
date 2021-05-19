@@ -3,14 +3,10 @@ import os
 import random
 import subprocess
 import pymysql
-import json
+
 import shutil
 from flask import Flask, request, jsonify
-from PIL import Image
-import base64
-from io import BytesIO
-import time
-from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 
