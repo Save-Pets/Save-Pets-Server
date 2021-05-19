@@ -2,10 +2,12 @@ import datetime
 import os
 import random
 import subprocess
+import sys
+
 import pymysql
 
 import shutil
-from flask import Flask, request, jsonify, logging
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -42,6 +44,7 @@ def register():
     reg_num= uniquenumber()
 
     print(os.getcwd())
+    sys.stdout.flush()
 
     os.chdir('./ML/Save-Pets-ML/SVM-Classifier/image/')
     createFolder('./%s' %(reg_num))
@@ -267,7 +270,7 @@ def getSVMResultForRegister():
 #     return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
-    gunicorn_logger = logging.getLogger('gunicorn.error')
-    app.logger.handlers = gunicorn_logger.handlers
-    app.logger.setLevel(gunicorn_logger.level)
+    # gunicorn_logger = logging.getLogger('gunicorn.error')
+    # app.logger.handlers = gunicorn_logger.handlers
+    # app.logger.setLevel(gunicorn_logger.level)
     app.run(debug=True)
