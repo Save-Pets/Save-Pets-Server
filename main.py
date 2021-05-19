@@ -43,7 +43,7 @@ def register():
     global reg_num
     reg_num= uniquenumber()
 
-    print(os.getcwd())
+    print("getcwd"+os.getcwd())
     sys.stdout.flush()
 
     os.chdir('./ML/Save-Pets-ML/SVM-Classifier/image/')
