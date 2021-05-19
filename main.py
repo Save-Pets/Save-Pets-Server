@@ -5,8 +5,7 @@ import subprocess
 import pymysql
 
 import shutil
-from flask import Flask, request, jsonify
-
+from flask import Flask, request, jsonify, logging
 
 app = Flask(__name__)
 
@@ -268,5 +267,7 @@ def getSVMResultForRegister():
 #     return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
+    app.run(debug=True)
