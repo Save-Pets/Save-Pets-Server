@@ -6,6 +6,10 @@ import pymysql
 import json
 import shutil
 from flask import Flask, request, jsonify
+from PIL import Image
+import base64
+from io import BytesIO
+import time
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -23,6 +27,11 @@ def db_connector():
 #중복없이 reg_num 생성
 alist=[]
 
+#배포 테스트
+@app.route('/')
+def hello():
+    return 'Welcome To SAVEPETS Application!'
+
 # [등록 API]
 # 이미지,정보 -> 이미지 서버에 저장 후 return 파싱된 정보, 등록번호
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,6 +41,7 @@ def register():
         global details
         details= request.form
         profile = request.files['profile']
+        # print(profile)
         # imgs = files.to_dict(flat=False)['filename[]']
     global reg_num
     reg_num= uniquenumber()
