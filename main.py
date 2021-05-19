@@ -42,12 +42,12 @@ def register():
         # imgs = files.to_dict(flat=False)['filename[]']
     global reg_num
     reg_num= uniquenumber()
+    #
+    # print("getcwd"+os.getcwd())
+    # print("getls"+str(os.system('ls')))
+    # sys.stdout.flush()
 
-    print("getcwd"+os.getcwd())
-    print("getls"+os.system('ls'))
-    sys.stdout.flush()
-
-    os.chdir('./ML/Save-Pets-ML/SVM-Classifier/image/')
+    os.system("cd ML/Save-Pets-ML/SVM-Classifier/image/")
     createFolder('./%s' %(reg_num))
 
     #이미지 5장, key = filename[] 저장 for preprocess
@@ -55,7 +55,7 @@ def register():
         f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
-    os.chdir('../')
+    os.system("cd ..")
     os.system('python preprocess.py --dir %s' %(reg_num))
     # print(os.getcwd())
 
@@ -204,7 +204,7 @@ def lookup():
         lookupimg= request.files['img']
         # print(os.getcwd())
         lookupimg.save('./ML/Save-Pets-ML/SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
-        os.chdir('./ML/Save-Pets-ML/SVM-Classifier/')
+        os.system("cd ML/Save-Pets-ML/SVM-Classifier/")
         # print(os.getcwd())
 
         # os.system('python Classifier.py --test %s' % (lookupimg.filename))
