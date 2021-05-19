@@ -52,7 +52,7 @@ def register():
     createFolder('./%s' %(reg_num))
 
     #이미지 5장, key = filename[] 저장 for preprocess
-    for index,f in enumerate (files.to_dict(flat=False)['filename[]']):
+    for index,f in enumerate (files.to_dict(flat=False)['filename']):
         f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
@@ -67,9 +67,10 @@ def register():
 
     # print(os.getcwd())
 
-    # 등록된 강아지인지 조회
+
     # os.system('python Classifier.py --test %s.jpg' %(reg_num))
 
+    # 등록된 강아지인지 조회
     result = getSVMResultForRegister()
     print(result.decode('utf-8').split(','))
     compare = result.decode('utf-8').split(',')
@@ -97,7 +98,7 @@ def register():
         pk1 = cursor.fetchone()
 
         # 등록번호 생성
-        reg_num = uniquenumber()
+        # reg_num = uniquenumber()
 
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
         val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, pk1,reg_num)
@@ -143,7 +144,7 @@ def register():
         rows = cursor.fetchone()
 
         # 등록번호 생성
-        reg_num = uniquenumber()
+        # reg_num = uniquenumber()
 
         #pet table에 insert
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
@@ -266,9 +267,9 @@ def getSVMResultForRegister():
 
 
 #error handler
-@app.errorhandler(400)
-def badRequest(error):
-    return jsonify({'message':'fail'})
+# @app.errorhandler(400)
+# def badRequest(error):
+#     return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
     app.run(debug=True)

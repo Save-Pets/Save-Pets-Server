@@ -1,7 +1,0 @@
-numpy
-matplotlib
-pickle-mixin
-sklearn
-argparse
-opencv-python
-opencv-contrib-python==3.4.2.16
