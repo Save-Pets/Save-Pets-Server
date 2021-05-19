@@ -48,7 +48,7 @@ def register():
     createFolder('./%s' %(reg_num))
 
     #이미지 5장, key = filename[] 저장 for preprocess
-    for index,f in enumerate (files.to_dict(flat=False)['filename']):
+    for index,f in enumerate (files.to_dict(flat=False)['filename[]']):
         f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
