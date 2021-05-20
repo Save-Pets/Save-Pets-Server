@@ -27,9 +27,10 @@ python 3.7.2
 <h2>Screenshot</h2>
 
 <h2>Role</h2> 
-|Name|Main Role|
-|------|---|
-|문수림| flask 기반 서버,db 개발 및 AWS 배포, 데이터 학습|
-|이해석| IOS 기반 Swift 앱 개발, 데이터 학습|
-|김종훈| preprocess ,Classifier modle 개발, 데이터 학습|
+| Name | Main Role |
+|---|---|  
+| 문수림 | flask 기반 서버,db 개발 및 AWS 배포, 데이터 학습|
+| 이해석 | IOS 기반 Swift 앱 개발, 데이터 학습|
+| 김종훈 | preprocess ,Classifier modle 개발, 데이터 학습|
+
 
