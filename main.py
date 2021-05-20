@@ -15,8 +15,8 @@ app = Flask(__name__)
 def db_connector():
     connector = pymysql.connect(host='localhost',
                                   user='root',
-                                  password='anstnfla25',
-                                  db='savepet',
+                                  password='Savepets_1234',
+                                  db='savepets',
                                   charset='utf8')
     return connector
 
@@ -47,15 +47,14 @@ def register():
     # print("getls"+str(os.system('ls')))
     # sys.stdout.flush()
 
-    os.system("cd ML/Save-Pets-ML/SVM-Classifier/image/")
+    os.chdir("./SVM-Classifier/image/")
     createFolder('./%s' %(reg_num))
-
     #이미지 5장, key = filename[] 저장 for preprocess
     for index,f in enumerate (files.to_dict(flat=False)['filename']):
         f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
-    os.system("cd ..")
+    os.chdir("../")
     os.system('python preprocess.py --dir %s' %(reg_num))
     # print(os.getcwd())
 
@@ -113,13 +112,13 @@ def register():
         # db등록 정보 가져오기
         fetchDB = "SELECT * FROM pet WHERE id ='%s'" % (latestid[0])
         cursor.execute(fetchDB)
-        all = cursor.fetchall()
+        send = cursor.fetchall()
         # print(all)
-        petname = all[0][1]
-        petbirth = all[0][3]
-        petgender = all[0][4]
-        petprofile = all[0][5]
-        petnumber = all[0][7]
+        petname = send[0][1]
+        petbirth = send[0][3]
+        petgender = send[0][4]
+        petprofile = send[0][5]
+        petnumber = send[0][7]
 
         db.commit()
 
@@ -161,11 +160,11 @@ def register():
         cursor.execute(new_fetchDB)
         new_all = cursor.fetchall()
         # print(new_all)
-        new_petname = all[0][1]
-        new_petbirth= all[0][3]
-        new_petgender=all[0][4]
-        new_petprofile=all[0][5]
-        new_petnumber=all[0][7]
+        new_petname = new_all[0][1]
+        new_petbirth= new_all[0][3]
+        new_petgender=new_all[0][4]
+        new_petprofile=new_all[0][5]
+        new_petnumber=new_all[0][7]
 
         db.commit()
 
@@ -201,10 +200,10 @@ def uniquenumber():
 def lookup():
     if request.method == 'POST':
         global lookupimg
-        lookupimg= request.files['img']
+        lookupimg= request.files['lookupimg']
         # print(os.getcwd())
-        lookupimg.save('./ML/Save-Pets-ML/SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
-        os.system("cd ML/Save-Pets-ML/SVM-Classifier/")
+        lookupimg.save('./SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
+        os.chdir("./SVM-Classifier/")
         # print(os.getcwd())
 
         # os.system('python Classifier.py --test %s' % (lookupimg.filename))
@@ -274,4 +273,4 @@ if __name__ == "__main__":
     # gunicorn_logger = logging.getLogger('gunicorn.error')
     # app.logger.handlers = gunicorn_logger.handlers
     # app.logger.setLevel(gunicorn_logger.level)
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
