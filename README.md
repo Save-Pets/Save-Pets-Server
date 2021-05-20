@@ -33,4 +33,9 @@ Name | Main Role
 이해석 | IOS 기반 Swift 앱 개발, 데이터 학습
 김종훈 | preprocess ,Classifier modle 개발, 데이터 학습
 
+|이름|role|
+|------|---|
+|문수림|flask 기반 서버,db 개발 및 AWS 배포,데이터 학습|
+|이해석|IOS 기반 Swift 앱 개발, 데이터 학습|
+|김종훈|preprocess,Classifier modle 개발,데이터 학습|
 
