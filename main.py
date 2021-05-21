@@ -43,7 +43,7 @@ def register():
 
         # print(profile)
         # imgs = files.to_dict(flat=False)['filename[]']
-    global reg_num
+    # global reg_num
     reg_num= uniquenumber()
 
     # profile이미지 서버에 저장 for url
@@ -56,20 +56,21 @@ def register():
     # print("getls"+str(os.system('ls')))
     # sys.stdout.flush()
 
-    os.chdir("./SVM-Classifier/image/")
-    createFolder('./%s' %(reg_num))
+    # os.chdir("./SVM-Classifier/image/")
+    createFolder('./SVM-Classifier/image/%s' %(reg_num))
     #이미지 5장, key = filename[] 저장 for preprocess
     for index,f in enumerate (files.to_dict(flat=False)['dogNose']):
-        f.save('./%s/' % (reg_num) + str(index)+'.jpg')
+        f.save('./SVM-Classifier/image/%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
-    os.chdir("../")
-    os.system('python preprocess.py --dir %s' %(reg_num))
-    # print(os.getcwd())
+    # os.chdir("../")
+
+
+    os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
 
     #5장 중에 첫번째 장 사진 복사 -> 조회
-    source ='./image/%s/0.jpg' %(reg_num)
-    destination = './Dog-Data/test/%s.jpg' %(reg_num)
+    source ='./SVM-Classifier/image/%s/0.jpg' %(reg_num)
+    destination = './SVM-Classifier/Dog-Data/test/%s.jpg' %(reg_num)
     shutil.copyfile(source, destination)
 
     # print(os.getcwd())
@@ -78,7 +79,7 @@ def register():
     # os.system('python Classifier.py --test %s.jpg' %(reg_num))
 
     # 등록된 강아지인지 조회
-    result = getSVMResultForRegister()
+    result = getSVMResultForRegister(reg_num)
     print(result.decode('utf-8').split(','))
     compare = result.decode('utf-8').split(',')
 
@@ -132,7 +133,7 @@ def register():
         db.commit()
 
         cursor.close()
-        os.chdir('../')
+        # os.chdir('../')
         return jsonify({'data': [{'dogName': petname, 'dogRegistNum': petnumber,
                                   'dogBirthYear': petbirth, 'dogSex': petgender, 'dogProfile': petprofile}],
                         'message': 'success'})
@@ -174,7 +175,7 @@ def register():
         new_petgender=new_all[0][4]
         new_petprofile=new_all[0][5]
         new_petnumber=new_all[0][7]
-        os.chdir('../')
+        # os.chdir('../')
         db.commit()
 
         cursor.close()
@@ -209,16 +210,16 @@ def uniquenumber():
 @app.route('/lookup', methods=['GET', 'POST'])
 def lookup():
     if request.method == 'POST':
-        global lookupimg
+        # global lookupimg
         lookupimg= request.files['dogNose']
         # print(os.getcwd())
         lookupimg.save('./SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
-        os.chdir("./SVM-Classifier/")
+        # os.chdir("./SVM-Classifier/")
         # print(os.getcwd())
 
         # os.system('python Classifier.py --test %s' % (lookupimg.filename))
 
-        result= getSVMResult()
+        result= getSVMResult(lookupimg)
         SVMresult = result.decode('utf-8').split(',')
 
         # print(SVMresult[0])
@@ -262,18 +263,22 @@ def lookup():
 def imgURLConnection(image_file):
     return render_template('profileimage.html',image_file='img/'+image_file)
 
-def getSVMResult():
-    cmd =['python','Classifier.py','--test','%s' %(lookupimg.filename)]
-    fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
+def getSVMResult(lookupimg):
+    os.chdir('./SVM-Classifier')
+    cmd =['python3','Classifier.py','--test','%s' %(lookupimg.filename)]
+    fd_popen = subprocess.Popen(cmd1, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
+    os.chdir('../')
     return data
 
-def getSVMResultForRegister():
-    cmd =['python','Classifier.py','--test','%s.jpg' %(reg_num)]
+def getSVMResultForRegister(reg_num):
+    os.chdir('./SVM-Classifier')
+    cmd =['python3','Classifier.py','--test','%s.jpg' %(reg_num)]
     fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
+    os.chdir('../')
     return data
 
 
