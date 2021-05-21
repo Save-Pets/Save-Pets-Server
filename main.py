@@ -50,7 +50,7 @@ def register():
     os.chdir("./SVM-Classifier/image/")
     createFolder('./%s' %(reg_num))
     #이미지 5장, key = filename[] 저장 for preprocess
-    for index,f in enumerate (files.to_dict(flat=False)['filename']):
+    for index,f in enumerate (files.to_dict(flat=False)['dogNose']):
         f.save('./%s/' % (reg_num) + str(index)+'.jpg')
 
     #preprocess
@@ -85,7 +85,7 @@ def register():
     cursor = db.cursor()
 
     #연락처 중복일 때 (기존 등록된 유저 일때)
-    phone = request.form['연락처']
+    phone = request.form['phoneNum']
     phone_confirm = "SELECT 1 FROM registerant WHERE regphone = '%s' " % (phone)
     cursor.execute(phone_confirm)
     data = cursor.fetchall()
@@ -99,7 +99,7 @@ def register():
         # reg_num = uniquenumber()
 
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, pk1,reg_num)
+        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profile, pk1,reg_num)
 
         cursor.execute(pet_sql, val1)
 
@@ -124,15 +124,15 @@ def register():
 
         cursor.close()
         os.chdir('../')
-        return jsonify({'data': [{'반려견': petname, '등록번호': petnumber,
-                                  '반려견태어난해': petbirth, '반려견성별': petgender, '프로필이미지': petprofile}],
+        return jsonify({'data': [{'dogName': petname, 'dogRegistNum': petnumber,
+                                  'dogBirthYear': petbirth, 'dogSex': petgender, 'dogProfile': petprofile}],
                         'message': 'success'})
 
     #새로운 유저
     else:
         #registerant table에 insert
         reg_sql = "INSERT INTO registerant (regname,regphone,regemail) VALUES(%s,%s,%s)"
-        val = (details['반려인'], details['연락처'], details['이메일'])
+        val = (details['registrant'], details['phoneNum'], details['email'])
 
         cursor.execute(reg_sql, val)
 
@@ -146,7 +146,7 @@ def register():
 
         #pet table에 insert
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-        val1 = (details['반려견'], details['품종'], details['태어난해'], details['성별'], profile, rows,reg_num)
+        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profile, rows,reg_num)
 
         cursor.execute(pet_sql, val1)
 
@@ -171,8 +171,8 @@ def register():
         cursor.close()
         
 
-        return jsonify({'data': [{'반려견': new_petname, '등록번호': new_petnumber,
-                                  '반려견태어난해':new_petbirth,'반려견성별':new_petgender,'프로필이미지':new_petprofile}], 'message': 'success'})
+        return jsonify({'data': [{'dogName': new_petname, 'dogRegistNum': new_petnumber,
+                                  'dogBirthYear':new_petbirth,'dogSex':new_petgender,'profile':new_petprofile}], 'message': 'success'})
 
 
 def createFolder(directory):
@@ -189,7 +189,7 @@ def uniquenumber():
         while a in alist:
             a = random.randint(1, 100)
     alist.append(a)
-    unique = details['반려견'][0] + str(details['연락처'][7:11])
+    unique = details['dogName'][0] + str(details['phoneNum'][7:11])
     # print(unique)
     reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a)+unique)
     return reg_num
@@ -201,7 +201,7 @@ def uniquenumber():
 def lookup():
     if request.method == 'POST':
         global lookupimg
-        lookupimg= request.files['lookupimg']
+        lookupimg= request.files['dogNose']
         # print(os.getcwd())
         lookupimg.save('./SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
         os.chdir("./SVM-Classifier/")
@@ -244,7 +244,7 @@ def lookup():
             #         registeremail=data
             db.commit()
 
-            return jsonify({'data':[{'등록번호':foundDog,'등록자이름':registername,'등록자연락처':registerphone,'등록자이메일':registeremail,'일치율':accurancy}],
+            return jsonify({'data':[{'dogRegistNum':foundDog,'registrant':registername,'phoneNum':registerphone,'email':registeremail,'matchRate':accurancy}],
             'message':'success'})
 
     # return jsonify({'message':'success'})
