@@ -65,7 +65,7 @@ def register():
 
     # print(os.getcwd())
 
-
+    
     # os.system('python Classifier.py --test %s.jpg' %(reg_num))
 
     # 등록된 강아지인지 조회
@@ -123,7 +123,7 @@ def register():
         db.commit()
 
         cursor.close()
-
+        os.chdir('../')
         return jsonify({'data': [{'반려견': petname, '등록번호': petnumber,
                                   '반려견태어난해': petbirth, '반려견성별': petgender, '프로필이미지': petprofile}],
                         'message': 'success'})
@@ -165,10 +165,11 @@ def register():
         new_petgender=new_all[0][4]
         new_petprofile=new_all[0][5]
         new_petnumber=new_all[0][7]
-
+        os.chdir('../')
         db.commit()
 
         cursor.close()
+        
 
         return jsonify({'data': [{'반려견': new_petname, '등록번호': new_petnumber,
                                   '반려견태어난해':new_petbirth,'반려견성별':new_petgender,'프로필이미지':new_petprofile}], 'message': 'success'})
