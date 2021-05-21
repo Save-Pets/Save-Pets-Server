@@ -7,7 +7,9 @@ import sys
 import pymysql
 
 import shutil
-from flask import Flask, request, jsonify
+
+from PIL import Image
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -15,8 +17,8 @@ app = Flask(__name__)
 def db_connector():
     connector = pymysql.connect(host='localhost',
                                   user='root',
-                                  password='Savepets_1234',
-                                  db='savepets',
+                                  password='anstnfla25',
+                                  db='savepet',
                                   charset='utf8')
     return connector
 
@@ -38,11 +40,18 @@ def register():
         global details
         details= request.form
         profile = request.files['profile']
+
         # print(profile)
         # imgs = files.to_dict(flat=False)['filename[]']
     global reg_num
     reg_num= uniquenumber()
-    #
+
+    # profile이미지 서버에 저장 for url
+    # createFolder('./Profile/')
+    profile.save('./static/img/%s' % (reg_num) +'.jpg')
+    profileUrl = "profileImg/%s" %(reg_num)
+    print(profileUrl)
+
     # print("getcwd"+os.getcwd())
     # print("getls"+str(os.system('ls')))
     # sys.stdout.flush()
@@ -99,7 +108,7 @@ def register():
         # reg_num = uniquenumber()
 
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profile, pk1,reg_num)
+        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, pk1,reg_num)
 
         cursor.execute(pet_sql, val1)
 
@@ -113,7 +122,7 @@ def register():
         fetchDB = "SELECT * FROM pet WHERE id ='%s'" % (latestid[0])
         cursor.execute(fetchDB)
         send = cursor.fetchall()
-        # print(all)
+        print(send)
         petname = send[0][1]
         petbirth = send[0][3]
         petgender = send[0][4]
@@ -146,7 +155,7 @@ def register():
 
         #pet table에 insert
         pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profile, rows,reg_num)
+        val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, rows,reg_num)
 
         cursor.execute(pet_sql, val1)
 
@@ -249,6 +258,10 @@ def lookup():
 
     # return jsonify({'message':'success'})
 
+@app.route('/profileImg/<image_file>')
+def imgURLConnection(image_file):
+    return render_template('profileimage.html',image_file='img/'+image_file)
+
 def getSVMResult():
     cmd =['python','Classifier.py','--test','%s' %(lookupimg.filename)]
     fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
@@ -262,6 +275,17 @@ def getSVMResultForRegister():
     data = fd_popen.read().strip()
     fd_popen.close()
     return data
+
+
+def createProfileFolder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print('Error: Creating directory. ' + directory)
+
+
+
 
 
 
