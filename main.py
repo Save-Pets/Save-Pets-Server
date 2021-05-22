@@ -262,10 +262,13 @@ def lookup():
         lookupimg= request.files['dogNose']
         lookupimg.save('./SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
 
-        result= getSVMResult(lookupimg)
+
+        try:
+            result= getSVMResult(lookupimg)
+        except Exception as e :
+            print("[조회] ML코드가 작동하지 않아 조회가 되지 않습니다",e)
+            return jsonify({"message":"fail"})
         SVMresult = result.decode('utf-8').split(',')
-
-
 
 
         if SVMresult[1] =='미등록강아지':
@@ -282,6 +285,13 @@ def lookup():
                 lookup_sql = "SELECT reg_id FROM pet WHERE uniquenumber='%s'" %(foundDog)
                 cursor.execute(lookup_sql)
                 rows = cursor.fetchone()
+                dogdata = cursor.fetchall()
+                petname=dogdata[0][1]
+                petbreed=dogdata[0][2]
+                petbirth=dogdata[0][3]
+                petgender=dogdata[0][4]
+                petprofile=dogdata[0][5]
+
                 # print(rows)
                 registerData_sql="SELECT * FROM registrant WHERE id='%s'" %(rows)
                 cursor.execute(registerData_sql)
@@ -296,8 +306,10 @@ def lookup():
                 lookupdb.commit()
 
                 return jsonify({'data': [
-                    {'dogRegistNum': foundDog, 'registrant': registername, 'phoneNum': registerphone,'email': registeremail, 'matchRate': accurancy}],
-                                'message': 'success'})
+                    {'registrant': registername, 'phoneNum': registerphone,'email': registeremail,'dogRegistNum': foundDog,
+                     'dogName':petname,'dogBreed':petbreed,'dogSex':petgender,'dogBirthYear':petbirth,
+                     'dogProfile':petprofile,'matchRate': accurancy,'isSuccess':True}],
+                                'message': '조회를 성공했습니다'})
 
             except Exception as e :
                 return jsonify({'message':'fail'})
@@ -311,7 +323,6 @@ def lookup():
 
 
 
-    # return jsonify({'message':'success'})
 
 @app.route('/profileImg/<image_file>')
 def imgURLConnection(image_file):
