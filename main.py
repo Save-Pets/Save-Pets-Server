@@ -87,21 +87,38 @@ def register():
     # print(compare[1])
     # print(result)
 
-    ##등록된 강아지 예외처리
-    # if compare[1] == '등록된강아지':
-    #     return jsonify({'message':'이미 등록된 강아지입니다.'})
-
     db = db_connector()
     cursor = db.cursor()
 
+    #[예외처리]이미 등록된 강아지일 경우
+    if compare[1] == '등록된강아지':
+        foundDog = compare[0]
+        lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" % (foundDog)
+        cursor.execute(lookup_sql)
+        registeredPetDatas = cursor.fetchall()
+
+        print(registeredPetDatas)
+        registeredPetName = registeredPetDatas[0][1]
+        registeredPetBreed = registeredPetDatas[0][2]
+        registeredPetSex = registeredPetDatas[0][4]
+        registeredPetBirthYear =registeredPetDatas[0][3]
+        registeredPetProfile = registeredPetDatas[0][5]
+
+        cursor.close()
+        return jsonify({'data':{'dogRegistNum':foundDog,'dogName':registeredPetName,'dogBreed':registeredPetBreed,'dogSex':registeredPetSex,
+                                'dogBirthYear:':registeredPetBirthYear,'dogProfile':registeredPetProfile,"isSuccess":False},'message':'이미 등록된 강아지입니다.'})
+
+
+
     #연락처 중복일 때 (기존 등록된 유저 일때)
     phone = request.form['phoneNum']
-    phone_confirm = "SELECT 1 FROM registerant WHERE regphone = '%s' " % (phone)
+    phone_confirm = "SELECT 1 FROM registrant WHERE regphone = '%s' " % (phone)
     cursor.execute(phone_confirm)
     data = cursor.fetchall()
 
+    #기존 등록 유저 & 새로운 강아지 등록
     if data:
-        pk = "select id from registerant WHERE regphone = '%s'" %(phone)
+        pk = "select id from registrant WHERE regphone = '%s'" %(phone)
         cursor.execute(pk)
         pk1 = cursor.fetchone()
 
@@ -129,25 +146,23 @@ def register():
         petgender = send[0][4]
         petprofile = send[0][5]
         petnumber = send[0][7]
-
+        petbreed = send[0][2]
         db.commit()
 
         cursor.close()
-        # os.chdir('../')
-        return jsonify({'data': [{'dogName': petname, 'dogRegistNum': petnumber,
-                                  'dogBirthYear': petbirth, 'dogSex': petgender, 'dogProfile': petprofile}],
-                        'message': 'success'})
+        return jsonify({'data': {'dogName': petname, 'dogRegistNum': petnumber,'dogBreed':petbreed,
+                                  'dogBirthYear':petbirth,'dogSex':petgender,'profile':petprofile,'isSuccess':True}, 'message': '등록이 성공했습니다'})
 
-    #새로운 유저
+    #새로운 유저 & 새로운 강아지
     else:
-        #registerant table에 insert
-        reg_sql = "INSERT INTO registerant (regname,regphone,regemail) VALUES(%s,%s,%s)"
+        #registrant table에 insert
+        reg_sql = "INSERT INTO registrant (regname,regphone,regemail) VALUES(%s,%s,%s)"
         val = (details['registrant'], details['phoneNum'], details['email'])
 
         cursor.execute(reg_sql, val)
 
         #primarykey
-        pk = "select id from registerant WHERE regphone='%s'" %(phone)
+        pk = "select id from registrant WHERE regphone='%s'" %(phone)
         cursor.execute(pk)
         rows = cursor.fetchone()
 
@@ -175,14 +190,13 @@ def register():
         new_petgender=new_all[0][4]
         new_petprofile=new_all[0][5]
         new_petnumber=new_all[0][7]
-        # os.chdir('../')
+        new_petbreed=new_all[0][2]
         db.commit()
-
         cursor.close()
         
 
-        return jsonify({'data': [{'dogName': new_petname, 'dogRegistNum': new_petnumber,
-                                  'dogBirthYear':new_petbirth,'dogSex':new_petgender,'profile':new_petprofile}], 'message': 'success'})
+        return jsonify({'data': {'dogName': new_petname, 'dogRegistNum': new_petnumber,'dogBreed':new_petbreed,
+                                  'dogBirthYear':new_petbirth,'dogSex':new_petgender,'profile':new_petprofile,'isSuccess':True}, 'message': '등록이 성공했습니다'})
 
 
 def createFolder(directory):
@@ -236,7 +250,7 @@ def lookup():
             cursor.execute(lookup_sql)
             rows = cursor.fetchone()
             # print(rows)
-            registerData_sql="SELECT * FROM registerant WHERE id='%s'" %(rows)
+            registerData_sql="SELECT * FROM registrant WHERE id='%s'" %(rows)
             cursor.execute(registerData_sql)
 
             datas = cursor.fetchall()
@@ -265,8 +279,8 @@ def imgURLConnection(image_file):
 
 def getSVMResult(lookupimg):
     os.chdir('./SVM-Classifier')
-    cmd =['python3','Classifier.py','--test','%s' %(lookupimg.filename)]
-    fd_popen = subprocess.Popen(cmd1, stdout=subprocess.PIPE).stdout
+    cmd =['python','Classifier.py','--test','%s' %(lookupimg.filename)]
+    fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
     os.chdir('../')
@@ -274,7 +288,7 @@ def getSVMResult(lookupimg):
 
 def getSVMResultForRegister(reg_num):
     os.chdir('./SVM-Classifier')
-    cmd =['python3','Classifier.py','--test','%s.jpg' %(reg_num)]
+    cmd =['python','Classifier.py','--test','%s.jpg' %(reg_num)]
     fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
