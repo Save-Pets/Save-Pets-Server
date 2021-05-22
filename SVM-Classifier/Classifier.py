@@ -137,17 +137,17 @@ def main():
             knn_k = key
 
     result =""
-    if svm_k==knn_k:
-        result = result+svm_k+","
-    else:
-        result =result+"a,"
-    # result = result+"202151796꿍1234"+","
-    # result =result+"등록된강아지"+","
+    # if svm_k==knn_k:
+    #     result = result+svm_k+","
+    # else:
+    #     result =result+"a,"
+    # # result = result+"202151796꿍1234"+","
+    # # result =result+"등록된강아지"+","
 
     if (svm_prob < 0.65 and knn_prob < 0.55) or svm_k != knn_k:
-        result =result+"미등록강아지"+","
+        result =result+"a,"+"미등록강아지"+","
     else:
-        result =result+"등록된강아지"+","
+        result =result+svm_k+","+"등록된강아지"+","
     #Accuracy
     if svm.score(X_test,Y_test) > knn.score(X_test,Y_test):
         result =result+str(svm.score(X_test,Y_test))

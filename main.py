@@ -43,7 +43,7 @@ def register():
 
     profile.save('./static/img/%s' % (reg_num) +'.jpg')
     profileUrl = "profileImg/%s" %(reg_num)
-    print(profileUrl)
+    # print(profileUrl)
 
     # print("getcwd"+os.getcwd())
     # print("getls"+str(os.system('ls')))
