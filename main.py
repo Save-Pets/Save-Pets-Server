@@ -1,11 +1,11 @@
-import datetime
+
 import os
 import random
 import subprocess
 import pymysql
 import shutil
 from flask import Flask, request, jsonify, render_template
-
+import datetime
 app = Flask(__name__)
 
 #db
@@ -20,7 +20,7 @@ def db_connector():
 
 #중복없이 reg_num 생성
 alist=[]
-
+now = datetime.datetime.now()
 #배포 테스트
 @app.route('/')
 def hello():
@@ -31,63 +31,25 @@ def hello():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        files= request.files
         global details
         details= request.form
         profile = request.files['profile']
+        forlookup = request.files['dogNose1']
 
-        # print(profile)
-        # imgs = files.to_dict(flat=False)['filename[]']
-    reg_num= uniquenumber()
-
-
-    profile.save('./static/img/%s' % (reg_num) +'.jpg')
-    profileUrl = "profileImg/%s" %(reg_num)
-    # print(profileUrl)
-
-    # print("getcwd"+os.getcwd())
-    # print("getls"+str(os.system('ls')))
-    # sys.stdout.flush()
-
-    # os.chdir("./SVM-Classifier/image/")
-    createFolder('./SVM-Classifier/image/%s' %(reg_num))
-    #이미지 5장, key = filename[] 저장 for preprocess
-    for index,f in enumerate (files.to_dict(flat=False)['dogNose']):
-        f.save('./SVM-Classifier/image/%s/' % (reg_num) + str(index)+'.jpg')
-
-    #preprocess
-    # os.chdir("../")
-
-    os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
-
-    #5장 중에 첫번째 장 사진 복사 -> 조회
-    source ='./SVM-Classifier/image/%s/0.jpg' %(reg_num)
-    destination = './SVM-Classifier/Dog-Data/test/%s.jpg' %(reg_num)
-    shutil.copyfile(source, destination)
-
-    # print(os.getcwd())
-
-    
-    # os.system('python Classifier.py --test %s.jpg' %(reg_num))
-
-    # 등록된 강아지인지 조회 [예외처리]ML코드가 안돌아서 등록이 안되는 경우
     try:
-        result = getSVMResultForRegister(reg_num)
 
-    except Exception as e :
-        print("ML코드가 안돌아가서 등록 실패",e)
-        return jsonify({'message':'fail'})
+        formoment = str(now.year)+str(now.month)+str(now.hour)+str(now.minute)+str(now.second)
+        print(formoment)
+        forlookup.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment))
+        #5장 중 1장만 ml코드 돌리기
+        result = getSVMResultForRegister(formoment)
+        compare = result.decode('utf-8').split(',')
+    except Exception as e:
+        print("ML코드가 안돌아가서 등록 실패", e)
+        return jsonify({'message': 'fail'})
 
-    compare = result.decode('utf-8').split(',')
-    # compare = result.decode('utf-8')
-    # print(compare[1])
-    # print(result)
 
-
-
-    #[예외처리]이미 등록된 강아지일 경우
-    if compare[1] == '등록된강아지':
-
+    if compare[1]=='등록된강아지':
         try:
             isRegistered = db_connector()
             cursor = isRegistered.cursor()
@@ -100,137 +62,158 @@ def register():
             registeredPetName = registeredPetDatas[0][1]
             registeredPetBreed = registeredPetDatas[0][2]
             registeredPetSex = registeredPetDatas[0][4]
-            registeredPetBirthYear =registeredPetDatas[0][3]
+            registeredPetBirthYear = registeredPetDatas[0][3]
             registeredPetProfile = registeredPetDatas[0][5]
-            
+
             return jsonify({'data': {'dogRegistNum': foundDog, 'dogName': registeredPetName, 'dogBreed': registeredPetBreed,
-                                 'dogSex': registeredPetSex,
-                                 'dogBirthYear:': registeredPetBirthYear, 'dogProfile': registeredPetProfile,
-                                 "isSuccess": False}, 'message': '이미 등록된 강아지입니다.'})
+                              'dogSex': registeredPetSex,
+                              'dogBirthYear:': registeredPetBirthYear, 'dogProfile': registeredPetProfile,
+                              "isSuccess": False}, 'message': '이미 등록된 강아지입니다.'})
 
         except Exception as e:
-            print('isRegistered db에서 예외가 발생했습니다',e)
+            print('isRegistered db에서 예외가 발생했습니다', e)
             return jsonify({'message': 'fail'})
 
-        finally :
+        finally:
             if isRegistered:
                 cursor.close()
                 isRegistered.close()
 
-
-
-
-
-    #연락처 중복확인  (기존 등록된 유저 일때)
-    try:
-        alreadyRegistered = db_connector()
-        cursor=alreadyRegistered.cursor()
-
-        phone = request.form['phoneNum']
-        phone_confirm = "SELECT 1 FROM registrant WHERE regphone = '%s' " % (phone)
-        cursor.execute(phone_confirm)
-        data = cursor.fetchall()
-
-    except Exception as e :
-        print("alreadyRegistered DB에서 예외가 발생했습니다",e)
-        return jsonify({'message':'fail'})
-
-
-    #기존 등록 유저 & 새로운 강아지 등록
-    if data:
-
-        try:
-            pk = "select id from registrant WHERE regphone = '%s'" %(phone)
-            cursor.execute(pk)
-            pk1 = cursor.fetchone()
-
-            pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, pk1,reg_num)
-
-            cursor.execute(pet_sql, val1)
-            # 가장 최근 insert id 불러오기
-            reg_send = "SELECT last_insert_id();"
-            cursor.execute(reg_send)
-            latestid = cursor.fetchone()
-
-            # db등록 정보 가져오기
-            fetchDB = "SELECT * FROM pet WHERE id ='%s'" % (latestid[0])
-            cursor.execute(fetchDB)
-            send = cursor.fetchall()
-            # print(send)
-            petname = send[0][1]
-            petbirth = send[0][3]
-            petgender = send[0][4]
-            petprofile = send[0][5]
-            petnumber = send[0][7]
-            petbreed = send[0][2]
-            alreadyRegistered.commit()
-
-            return jsonify({'data': {'dogName': petname, 'dogRegistNum': petnumber, 'dogBreed': petbreed,
-                                     'dogBirthYear': petbirth, 'dogSex': petgender, 'profile': petprofile,
-                                     'isSuccess': True}, 'message': '등록이 성공했습니다'})
-        except Exception as e :
-            alreadyRegistered.rollback()
-            print("alreadyRegistered2에서 예외가 발생했습니다",e)
-            return jsonify({'message': 'fail'})
-
-        finally:
-            if alreadyRegistered:
-                cursor.close()
-                alreadyRegistered.close()
-
-
-    #새로운 유저 & 새로운 강아지
+    #미등록강아지인 경우
     else:
-        #registrant table에 insert
+        reg_num= uniquenumber()
+        print('hi')
+        #프로필 이미지
+        profile.save('./static/img/%s' % (reg_num) +'.jpg')
+        profileUrl = "profileImg/%s" %(reg_num)
+
+        createFolder('./SVM-Classifier/image/%s' %(reg_num))
+        #이미지 5장, key = filename[] 저장 for preprocess
+        request.files['dogNose1'].save('./SVM-Classifier/image/%s/' % (reg_num) +'0.jpg')
+        request.files['dogNose2'].save('./SVM-Classifier/image/%s/' % (reg_num) +'1.jpg')
+        request.files['dogNose3'].save('./SVM-Classifier/image/%s/' % (reg_num) +'2.jpg')
+        request.files['dogNose4'].save('./SVM-Classifier/image/%s/' % (reg_num) +'3.jpg')
+        request.files['dogNose5'].save('./SVM-Classifier/image/%s/' % (reg_num) +'4.jpg')
+
+        os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
+
+        # #5장 중에 첫번째 장 사진 복사 -> 조회
+        # source ='./SVM-Classifier/image/%s/0.jpg' %(reg_num)
+        # destination = './SVM-Classifier/Dog-Data/test/%s.jpg' %(reg_num)
+        # shutil.copyfile(source, destination)
+
+
+
+        #연락처 중복확인  (기존 등록된 유저 일때)
         try:
-            newuser = db_connector()
-            cursor=newuser.cursor()
-            reg_sql = "INSERT INTO registrant (regname,regphone,regemail) VALUES(%s,%s,%s)"
-            val = (details['registrant'], details['phoneNum'], details['email'])
-            cursor.execute(reg_sql, val)
+            alreadyRegistered = db_connector()
+            cursor=alreadyRegistered.cursor()
 
-            #primarykey
-            pk = "select id from registrant WHERE regphone='%s'" %(phone)
-            cursor.execute(pk)
-            rows = cursor.fetchone()
-
-            #pet table에 insert
-            pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
-            val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, rows,reg_num)
-
-            cursor.execute(pet_sql, val1)
-
-            #가장 최근 insert id 불러오기
-            new_reg_send="SELECT last_insert_id();"
-            cursor.execute(new_reg_send)
-            new_latestid = cursor.fetchone()
-
-            #db등록 정보 가져오기
-            new_fetchDB="SELECT * FROM pet WHERE id ='%s'" %(new_latestid[0])
-            cursor.execute(new_fetchDB)
-            new_all = cursor.fetchall()
-            # print(new_all)
-            new_petname = new_all[0][1]
-            new_petbirth= new_all[0][3]
-            new_petgender=new_all[0][4]
-            new_petprofile=new_all[0][5]
-            new_petnumber=new_all[0][7]
-            new_petbreed=new_all[0][2]
-            newuser.commit()
-            return jsonify({'data': {'dogName': new_petname, 'dogRegistNum': new_petnumber, 'dogBreed': new_petbreed,
-                                     'dogBirthYear': new_petbirth, 'dogSex': new_petgender, 'profile': new_petprofile,
-                                     'isSuccess': True}, 'message': '등록이 성공했습니다'})
+            phone = request.form['phoneNum']
+            phone_confirm = "SELECT 1 FROM registrant WHERE regphone = '%s' " % (phone)
+            cursor.execute(phone_confirm)
+            data = cursor.fetchall()
 
         except Exception as e :
-            newuser.rollback()
-            print("new user db에서 예외가 발생했습니다")
+            print("alreadyRegistered DB에서 예외가 발생했습니다",e)
             return jsonify({'message':'fail'})
 
-        finally:
-            if newuser:
-                cursor.close()
-                newuser.close()
+
+        #기존 등록 유저 & 새로운 강아지 등록
+        if data:
+
+            try:
+                pk = "select id from registrant WHERE regphone = '%s'" %(phone)
+                cursor.execute(pk)
+                pk1 = cursor.fetchone()
+
+                pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, pk1,reg_num)
+
+                cursor.execute(pet_sql, val1)
+                # 가장 최근 insert id 불러오기
+                reg_send = "SELECT last_insert_id();"
+                cursor.execute(reg_send)
+                latestid = cursor.fetchone()
+
+                # db등록 정보 가져오기
+                fetchDB = "SELECT * FROM pet WHERE id ='%s'" % (latestid[0])
+                cursor.execute(fetchDB)
+                send = cursor.fetchall()
+                # print(send)
+                petname = send[0][1]
+                petbirth = send[0][3]
+                petgender = send[0][4]
+                petprofile = send[0][5]
+                petnumber = send[0][7]
+                petbreed = send[0][2]
+                alreadyRegistered.commit()
+
+                return jsonify({'data': {'dogName': petname, 'dogRegistNum': petnumber, 'dogBreed': petbreed,
+                                         'dogBirthYear': petbirth, 'dogSex': petgender, 'profile': petprofile,
+                                         'isSuccess': True}, 'message': '등록이 성공했습니다'})
+            except Exception as e :
+                alreadyRegistered.rollback()
+                print("alreadyRegistered2에서 예외가 발생했습니다",e)
+                return jsonify({'message': 'fail'})
+
+            finally:
+                if alreadyRegistered:
+                    cursor.close()
+                    alreadyRegistered.close()
+
+
+        #새로운 유저 & 새로운 강아지
+        else:
+            #registrant table에 insert
+            try:
+                newuser = db_connector()
+                cursor=newuser.cursor()
+                reg_sql = "INSERT INTO registrant (regname,regphone,regemail) VALUES(%s,%s,%s)"
+                val = (details['registrant'], details['phoneNum'], details['email'])
+                cursor.execute(reg_sql, val)
+
+                #primarykey
+                pk = "select id from registrant WHERE regphone='%s'" %(phone)
+                cursor.execute(pk)
+                rows = cursor.fetchone()
+
+                #pet table에 insert
+                pet_sql = "INSERT INTO pet (petname,petbreed,petbirth,petgender,petprofile,reg_id,uniquenumber) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                val1 = (details['dogName'], details['dogBreed'], details['dogBirthYear'], details['dogSex'], profileUrl, rows,reg_num)
+
+                cursor.execute(pet_sql, val1)
+
+                #가장 최근 insert id 불러오기
+                new_reg_send="SELECT last_insert_id();"
+                cursor.execute(new_reg_send)
+                new_latestid = cursor.fetchone()
+
+                #db등록 정보 가져오기
+                new_fetchDB="SELECT * FROM pet WHERE id ='%s'" %(new_latestid[0])
+                cursor.execute(new_fetchDB)
+                new_all = cursor.fetchall()
+                # print(new_all)
+                new_petname = new_all[0][1]
+                new_petbirth= new_all[0][3]
+                new_petgender=new_all[0][4]
+                new_petprofile=new_all[0][5]
+                new_petnumber=new_all[0][7]
+                new_petbreed=new_all[0][2]
+                newuser.commit()
+                return jsonify({'data': {'dogName': new_petname, 'dogRegistNum': new_petnumber, 'dogBreed': new_petbreed,
+                                         'dogBirthYear': new_petbirth, 'dogSex': new_petgender, 'profile': new_petprofile,
+                                         'isSuccess': True}, 'message': '등록이 성공했습니다'})
+
+            except Exception as e :
+                newuser.rollback()
+                print("new user db에서 예외가 발생했습니다")
+                return jsonify({'message':'fail'})
+
+            finally:
+                if newuser:
+                    cursor.close()
+                    newuser.close()
 
 
 
@@ -261,11 +244,11 @@ def uniquenumber():
 def lookup():
     if request.method == 'POST':
         lookupimg= request.files['dogNose']
-        lookupimg.save('./SVM-Classifier/Dog-Data/test/'+lookupimg.filename)
-
+        formomentLookup = str(now.year + now.month + now.hour + now.minute + now.second)
+        lookupimg.save('./SVM-Classifier/Dog-Data/test/'+formomentLookup)
 
         try:
-            result= getSVMResult(lookupimg)
+            result= getSVMResult(formomentLookup)
         except Exception as e :
             print("[조회] ML코드가 작동하지 않아 조회가 되지 않습니다",e)
             return jsonify({"message":"fail"})
@@ -333,18 +316,18 @@ def lookup():
 def imgURLConnection(image_file):
     return render_template('profileimage.html',image_file='img/'+image_file)
 
-def getSVMResult(lookupimg):
+def getSVMResult(formomentLookup):
     os.chdir('./SVM-Classifier')
-    cmd =['python','Classifier.py','--test','%s' %(lookupimg.filename)]
+    cmd =['python','Classifier.py','--test','%s' %(formomentLookup+'.jpg')]
     fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
     os.chdir('../')
     return data
 
-def getSVMResultForRegister(reg_num):
+def getSVMResultForRegister(formoment):
     os.chdir('./SVM-Classifier')
-    cmd =['python','Classifier.py','--test','%s.jpg' %(reg_num)]
+    cmd =['python','Classifier.py','--test','%s' %(formoment+'.jpg')]
     fd_popen = subprocess.Popen(cmd, stdout=subprocess.PIPE).stdout
     data = fd_popen.read().strip()
     fd_popen.close()
