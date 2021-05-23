@@ -20,7 +20,6 @@ def db_connector():
 
 #중복없이 reg_num 생성
 alist=[]
-now = datetime.datetime.now()
 #배포 테스트
 @app.route('/')
 def hello():
@@ -31,19 +30,26 @@ def hello():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        dogNose2=request.files['dogNose2']
+        dogNose3=request.files['dogNose3']
+        dogNose4=request.files['dogNose4']
+        dogNose5=request.files['dogNose5']
         global details
         details= request.form
         profile = request.files['profile']
         forlookup = request.files['dogNose1']
 
     try:
-
+        now = datetime.datetime.now()
         formoment = str(now.year)+str(now.month)+str(now.hour)+str(now.minute)+str(now.second)
         print(formoment)
         forlookup.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment))
         #5장 중 1장만 ml코드 돌리기
         result = getSVMResultForRegister(formoment)
         compare = result.decode('utf-8').split(',')
+        print(compare)
+        if compare ==['']:
+            raise Exception('error')
     except Exception as e:
         print("ML코드가 안돌아가서 등록 실패", e)
         return jsonify({'message': 'fail'})
@@ -84,18 +90,24 @@ def register():
         reg_num= uniquenumber()
         print('hi')
         #프로필 이미지
-        profile.save('./static/img/%s' % (reg_num) +'.jpg')
+        profile.save('./static/img/%s' %(reg_num) +'.jpg')
         profileUrl = "profileImg/%s" %(reg_num)
 
         createFolder('./SVM-Classifier/image/%s' %(reg_num))
         #이미지 5장, key = filename[] 저장 for preprocess
-        request.files['dogNose1'].save('./SVM-Classifier/image/%s/' % (reg_num) +'0.jpg')
-        request.files['dogNose2'].save('./SVM-Classifier/image/%s/' % (reg_num) +'1.jpg')
-        request.files['dogNose3'].save('./SVM-Classifier/image/%s/' % (reg_num) +'2.jpg')
-        request.files['dogNose4'].save('./SVM-Classifier/image/%s/' % (reg_num) +'3.jpg')
-        request.files['dogNose5'].save('./SVM-Classifier/image/%s/' % (reg_num) +'4.jpg')
-
-        os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
+        source = './SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment)
+        destination = './SVM-Classifier/image/%s/0.jpg' %(reg_num)
+        shutil.copyfile(source, destination)
+        dogNose2.save('./SVM-Classifier/image/%s/' %(reg_num) +'1.jpg')
+        dogNose3.save('./SVM-Classifier/image/%s/' %(reg_num) +'2.jpg')
+        dogNose4.save('./SVM-Classifier/image/%s/' %(reg_num) +'3.jpg')
+        dogNose5.save('./SVM-Classifier/image/%s/' %(reg_num) +'4.jpg')
+        
+        try:
+            os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
+        except Exception as e :
+            print("[등록]미등록강아지 preprocess ML코드 예외 발생")
+            return jsonify({'message':'fail'})
 
         # #5장 중에 첫번째 장 사진 복사 -> 조회
         # source ='./SVM-Classifier/image/%s/0.jpg' %(reg_num)
@@ -243,16 +255,20 @@ def uniquenumber():
 @app.route('/lookup', methods=['GET', 'POST'])
 def lookup():
     if request.method == 'POST':
-        lookupimg= request.files['dogNose']
-        formomentLookup = str(now.year + now.month + now.hour + now.minute + now.second)
-        lookupimg.save('./SVM-Classifier/Dog-Data/test/'+formomentLookup)
+        lookupimg=request.files['dogNose']
+        now1=datetime.datetime.now()
+        formomentLookup = str(now1.year) + str(now1.month) + str(now1.hour) + str(now1.minute) + str(now1.second)
+        print(formomentLookup)
+        lookupimg.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formomentLookup))
 
         try:
             result= getSVMResult(formomentLookup)
+            SVMresult=result.decode('utf-8').split(',')
+            if SVMresult==['']:
+                raise Exception('attribute error')
         except Exception as e :
             print("[조회] ML코드가 작동하지 않아 조회가 되지 않습니다",e)
             return jsonify({"message":"fail"})
-        SVMresult = result.decode('utf-8').split(',')
 
         print(SVMresult);
         print(SVMresult[1]);
@@ -348,14 +364,12 @@ def createProfileFolder(directory):
 
 
 # error handler
-@app.errorhandler(500)
-def serverErrorHandler(error):
-    return jsonify({'message':'fail'})
+#@app.errorhandler(500)
+#def serverErrorHandler(error):
+#    print('서버에 문제가 생겼습니다')
+#    return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
-    # gunicorn_logger = logging.getLogger('gunicorn.error')
-    # app.logger.handlers = gunicorn_logger.handlers
-    # app.logger.setLevel(gunicorn_logger.level)
-    app.config['TRAP_HTTP_EXCEPTIONS']=True
-    app.register_error_handler(Exception,serverErrorHandler)
+    #app.config['TRAP_HTTP_EXCEPTIONS']=True
+    #app.register_error_handler(Exception,serverErrorHandler)
     app.run(host='0.0.0.0',debug=True)
