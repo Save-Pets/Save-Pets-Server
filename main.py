@@ -12,8 +12,8 @@ app = Flask(__name__)
 def db_connector():
     connector = pymysql.connect(host='localhost',
                                   user='root',
-                                  password='anstnfla25',
-                                  db='savepet',
+                                  password='Savepets_1234',
+                                  db='savepets',
                                   charset='utf8')
     return connector
 
@@ -92,16 +92,17 @@ def register():
             isRegistered = db_connector()
             cursor = isRegistered.cursor()
             foundDog = compare[0]
-            lookup_sql = "SELECT * FROM pet WHERE niquenumber='%s'" % (foundDog)
+            print(foundDog)
+            lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" % (foundDog)
             cursor.execute(lookup_sql)
             registeredPetDatas = cursor.fetchall()
-
+            print(registeredPetDatas)
             registeredPetName = registeredPetDatas[0][1]
             registeredPetBreed = registeredPetDatas[0][2]
             registeredPetSex = registeredPetDatas[0][4]
             registeredPetBirthYear =registeredPetDatas[0][3]
             registeredPetProfile = registeredPetDatas[0][5]
-
+            
             return jsonify({'data': {'dogRegistNum': foundDog, 'dogName': registeredPetName, 'dogBreed': registeredPetBreed,
                                  'dogSex': registeredPetSex,
                                  'dogBirthYear:': registeredPetBirthYear, 'dogProfile': registeredPetProfile,
@@ -270,6 +271,8 @@ def lookup():
             return jsonify({"message":"fail"})
         SVMresult = result.decode('utf-8').split(',')
 
+        print(SVMresult);
+        print(SVMresult[1]);
 
         if SVMresult[1] =='미등록강아지':
             return jsonify({'data':{'isSuccess':False},'message':'조회된 강아지가 없습니다'})
@@ -282,10 +285,12 @@ def lookup():
 
                 foundDog=SVMresult[0]
                 accurancy=SVMresult[2]
-                lookup_sql = "SELECT reg_id FROM pet WHERE uniquenumber='%s'" %(foundDog)
+                print(foundDog)
+                lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" %(foundDog)
                 cursor.execute(lookup_sql)
-                rows = cursor.fetchone()
                 dogdata = cursor.fetchall()
+                print(dogdata)
+                rows=dogdata[0][6]
                 petname=dogdata[0][1]
                 petbreed=dogdata[0][2]
                 petbirth=dogdata[0][3]
@@ -297,7 +302,7 @@ def lookup():
                 cursor.execute(registerData_sql)
 
                 datas = cursor.fetchall()
-                # print(datas)
+                print(datas)
                 registername=datas[0][1]
                 registerphone=datas[0][2]
                 registeremail=datas[0][3]
@@ -312,8 +317,8 @@ def lookup():
                                 'message': '조회를 성공했습니다'})
 
             except Exception as e :
-                return jsonify({'message':'fail'})
                 print("lookupdb에 예외가 발생했습니다")
+                return jsonify({'message':'fail'})
 
             finally:
                 cursor.close()
@@ -361,11 +366,13 @@ def createProfileFolder(directory):
 
 # error handler
 @app.errorhandler(500)
-def serverError(error):
+def serverErrorHandler(error):
     return jsonify({'message':'fail'})
 
 if __name__ == "__main__":
     # gunicorn_logger = logging.getLogger('gunicorn.error')
     # app.logger.handlers = gunicorn_logger.handlers
     # app.logger.setLevel(gunicorn_logger.level)
+    app.config['TRAP_HTTP_EXCEPTIONS']=True
+    app.register_error_handler(Exception,serverErrorHandler)
     app.run(host='0.0.0.0',debug=True)
