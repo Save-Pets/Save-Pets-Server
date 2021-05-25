@@ -149,10 +149,10 @@ def main():
     else:
         result =result+svm_k+","+"등록된강아지"+","
     #Accuracy
-    if svm.score(X_test,Y_test) > knn.score(X_test,Y_test):
-        result =result+str(svm.score(X_test,Y_test))
+    if svm_prob > knn_prob:
+        result =result+str(svm_prob)
     else :
-        result =result+str(knn.score(X_test,Y_test))
+        result =result+str(knn_prob)
     # print("SVM Score: ", svm.score(X_test, Y_test))
     # print("KNN Score: ", knn.score(X_test, Y_test))
 

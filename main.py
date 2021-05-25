@@ -36,7 +36,7 @@ def register():
         dogNose5=request.files['dogNose5']
         global details
         details= request.form
-        profile = request.files['profile']
+        profile = request.files['dogProfile']
         forlookup = request.files['dogNose1']
 
     try:
@@ -69,12 +69,12 @@ def register():
             registeredPetBreed = registeredPetDatas[0][2]
             registeredPetSex = registeredPetDatas[0][4]
             registeredPetBirthYear = registeredPetDatas[0][3]
-            registeredPetProfile = registeredPetDatas[0][5]
+            registeredPetProfile = registeredPetDatas[0][5]+'.jpg'
 
             return jsonify({'data': {'dogRegistNum': foundDog, 'dogName': registeredPetName, 'dogBreed': registeredPetBreed,
                               'dogSex': registeredPetSex,
-                              'dogBirthYear:': registeredPetBirthYear, 'dogProfile': registeredPetProfile,
-                              "isSuccess": False}, 'message': '이미 등록된 강아지입니다.'})
+                              'dogBirthYear': registeredPetBirthYear, 'dogProfile': registeredPetProfile,
+                              'isSuccess': False}, 'message': '이미 등록된 강아지입니다.'})
 
         except Exception as e:
             print('isRegistered db에서 예외가 발생했습니다', e)
@@ -156,13 +156,13 @@ def register():
                 petname = send[0][1]
                 petbirth = send[0][3]
                 petgender = send[0][4]
-                petprofile = send[0][5]
+                petprofile = send[0][5]+'.jpg'
                 petnumber = send[0][7]
                 petbreed = send[0][2]
                 alreadyRegistered.commit()
 
                 return jsonify({'data': {'dogName': petname, 'dogRegistNum': petnumber, 'dogBreed': petbreed,
-                                         'dogBirthYear': petbirth, 'dogSex': petgender, 'profile': petprofile,
+                                         'dogBirthYear': petbirth, 'dogSex': petgender, 'dogProfile': petprofile,
                                          'isSuccess': True}, 'message': '등록이 성공했습니다'})
             except Exception as e :
                 alreadyRegistered.rollback()
@@ -209,12 +209,12 @@ def register():
                 new_petname = new_all[0][1]
                 new_petbirth= new_all[0][3]
                 new_petgender=new_all[0][4]
-                new_petprofile=new_all[0][5]
+                new_petprofile=new_all[0][5]+'.jpg'
                 new_petnumber=new_all[0][7]
                 new_petbreed=new_all[0][2]
                 newuser.commit()
                 return jsonify({'data': {'dogName': new_petname, 'dogRegistNum': new_petnumber, 'dogBreed': new_petbreed,
-                                         'dogBirthYear': new_petbirth, 'dogSex': new_petgender, 'profile': new_petprofile,
+                                         'dogBirthYear': new_petbirth, 'dogSex': new_petgender, 'dogProfile': new_petprofile,
                                          'isSuccess': True}, 'message': '등록이 성공했습니다'})
 
             except Exception as e :
@@ -244,7 +244,8 @@ def uniquenumber():
         while a in alist:
             a = random.randint(1, 100)
     alist.append(a)
-    unique = details['dogName'][0] + str(details['phoneNum'][7:11])
+    #unique = details['dogName'][0] + str(details['phoneNum'][7:11])
+    unique = str(details['phoneNum'][7:11])
     # print(unique)
     reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a)+unique)
     return reg_num
@@ -284,6 +285,8 @@ def lookup():
 
                 foundDog=SVMresult[0]
                 accurancy=SVMresult[2]
+                accurancy1=round(accurancy,2)*100
+                print(accurancy1)
                 print(foundDog)
                 lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" %(foundDog)
                 cursor.execute(lookup_sql)
@@ -294,7 +297,7 @@ def lookup():
                 petbreed=dogdata[0][2]
                 petbirth=dogdata[0][3]
                 petgender=dogdata[0][4]
-                petprofile=dogdata[0][5]
+                petprofile=dogdata[0][5]+'.jpg'
 
                 # print(rows)
                 registerData_sql="SELECT * FROM registrant WHERE id='%s'" %(rows)
@@ -309,10 +312,10 @@ def lookup():
 
                 lookupdb.commit()
 
-                return jsonify({'data': [
+                return jsonify({'data': 
                     {'registrant': registername, 'phoneNum': registerphone,'email': registeremail,'dogRegistNum': foundDog,
                      'dogName':petname,'dogBreed':petbreed,'dogSex':petgender,'dogBirthYear':petbirth,
-                     'dogProfile':petprofile,'matchRate': accurancy,'isSuccess':True}],
+                     'dogProfile':petprofile,'matchRate': accurancy1,'isSuccess':True},
                                 'message': '조회를 성공했습니다'})
 
             except Exception as e :
