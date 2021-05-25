@@ -68,8 +68,12 @@ def main():
     path = opt.dir + "/train"
     file_list = os.listdir(path)
     label2id = {}
+    idx = 0
     for i, label in enumerate(file_list):
-        label2id[label] = i
+        if label == ".DS_Store":
+            continue;
+        label2id[label] = idx
+        idx += 1
     X, Y = read_data(label2id)
 
     image_descriptors = extract_sift_features(X)

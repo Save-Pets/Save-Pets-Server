@@ -285,8 +285,8 @@ def lookup():
 
                 foundDog=SVMresult[0]
                 accurancy=SVMresult[2]
-                accurancy1=round(accurancy,2)*100
-                print(accurancy1)
+                accurancy1=round(float(accurancy),2)*100
+                accurancy1 = str(accurancy1)
                 print(foundDog)
                 lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" %(foundDog)
                 cursor.execute(lookup_sql)

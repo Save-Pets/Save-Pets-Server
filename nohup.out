@@ -1,0 +1,184 @@
+ * Serving Flask app 'main' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.31.34.126:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 11:34:14] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 11:38:22] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:38:22] "GET /profileImg/2021525323333.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 11:42:24] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:42:24] "GET /profileImg/2021525323333.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 11:49:48] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:49:49] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:53:55] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:53:55] "GET /static/img/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:16] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:16] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:54:18] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:18] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:54:33] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:33] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:54:34] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:34] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:54:34] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:54:34] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:55:21] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:55:21] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+175.196.169.199 - - [25/May/2021 11:57:06] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 11:59:53] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 11:59:53] "GET /static/img/2021525323333 HTTP/1.1" 404 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:01:21] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:01:22] "GET /static/img/2021525323333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:02:01] "GET /profileImg/2021525493333.jpg HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:02:01] "GET /static/img/2021525493333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:06:04] "POST /register HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:06:05] "GET /static/img/2021525323333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:10:38] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:10:57] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:11:56] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:12:44] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:13:06] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:14:27] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:15:49] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:16:16] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:18:42] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:19:43] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:20:08] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:20:28] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:20:45] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:29:24] "POST /lookup HTTP/1.1" 200 -
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+2021511344
+['2021525323333', '등록된강아지', '0.9153762437973622']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215113812
+['2021525323333', '등록된강아지', '1.0']
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+20215114214
+['2021525323333', '등록된강아지', '1.0']
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+20215114938
+['a', '미등록강아지', '0.906422099328031']
+hi
+20215115941
+['2021525323333', '등록된강아지', '0.9640837477118156']
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+2021512110
+['2021525323333', '등록된강아지', '0.836461384980017']
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+2021512553
+['2021525323333', '등록된강아지', '0.8240518098590938']
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+20215121026
+['2021525493333', '등록된강아지', '0.6124057786472163']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121045
+['2021525493333', '등록된강아지', '0.6124057786472163']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121145
+['2021525493333', '등록된강아지', '0.6124057786472163']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121232
+['2021525323333', '등록된강아지', '0.9293305991139946']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121254
+['2021525323333', '등록된강아지', '0.9145641751051218']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121415
+['2021525493333', '등록된강아지', '0.6124057786472163']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121537
+['a', '미등록강아지', '0.4083875823682833']
+미등록강아지
+2021512164
+['2021525323333', '등록된강아지', '0.9201257609426198']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121830
+['2021525323333', '등록된강아지', '0.9205804852808248']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121930
+['2020420304321', '등록된강아지', '0.705913044533071']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215121956
+['2020420304321', '등록된강아지', '0.9071640173491189']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215122017
+['2020420304321', '등록된강아지', '0.9382088534544627']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215122034
+['2020420304321', '등록된강아지', '0.8063359411047296']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+20215122912
+['2021525323333', '등록된강아지', '0.8759861667235264']
+등록된강아지
+lookupdb에 예외가 발생했습니다
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:42:11] "POST /lookup HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:42:12] "GET /static/img/2021525323333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+175.196.169.199 - - [25/May/2021 12:43:10] "POST /lookup HTTP/1.1" 200 -
+175.196.169.199 - - [25/May/2021 12:43:11] "GET /static/img/2021525323333.jpg HTTP/1.1" 304 -
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/SVM-Classifier/Classifier.py', reloading
+20215124159
+['2021525323333', '등록된강아지', '0.9097966658075214']
+등록된강아지
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+((20, '이해석', '01022223333', 'haeok@gmail.com'),)
+20215124258
+['2021525323333', '등록된강아지', '0.8925973148043161']
+등록된강아지
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+((20, '이해석', '01022223333', 'haeok@gmail.com'),)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
