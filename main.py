@@ -96,12 +96,18 @@ def register():
         createFolder('./SVM-Classifier/image/%s' %(reg_num))
         #이미지 5장, key = filename[] 저장 for preprocess
         source = './SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment)
-        destination = './SVM-Classifier/image/%s/0.jpg' %(reg_num)
+        destination = './SVM-Classifier/rawimage/%s/0.jpg' %(reg_num)
         shutil.copyfile(source, destination)
-        dogNose2.save('./SVM-Classifier/image/%s/' %(reg_num) +'1.jpg')
-        dogNose3.save('./SVM-Classifier/image/%s/' %(reg_num) +'2.jpg')
-        dogNose4.save('./SVM-Classifier/image/%s/' %(reg_num) +'3.jpg')
-        dogNose5.save('./SVM-Classifier/image/%s/' %(reg_num) +'4.jpg')
+        dogNose2.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'1.jpg')
+        dogNose3.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'2.jpg')
+        dogNose4.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'3.jpg')
+        dogNose5.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'4.jpg')
+
+        try:
+            os.system('python ../YOLOv5/detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25') %(reg_num)
+        except Exception as e:
+            print("[등록] 미등록 강아지 yolo 코드 예외 발생")
+            return jsonify({'messgae:fail'})
         
         try:
             os.system('cd SVM-Classifier && python preprocess.py --dir %s' %(reg_num))
@@ -247,7 +253,7 @@ def uniquenumber():
     #unique = details['dogName'][0] + str(details['phoneNum'][7:11])
     unique = str(details['phoneNum'][7:11])
     # print(unique)
-    reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) + str(a)+unique)
+    reg_num = (str(date_time.year) + str(date_time.month) + str(date_time.day) +str(date_time.second)+ str(a)+unique)
     return reg_num
 
 
