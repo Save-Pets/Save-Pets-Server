@@ -448,3 +448,59 @@ FileNotFoundError: [Errno 2] No such file or directory: './SVM-Classifier/Dog-Da
 [ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
 61.77.60.206 - - [26/May/2021 11:04:23] "POST /lookup HTTP/1.1" 200 -
 61.77.60.206 - - [26/May/2021 11:04:24] "GET /static/img/2021526555432.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:11:38] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:11:39] "GET /static/img/2020101201234.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:13:03] "POST /lookup HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:13:04] "GET /static/img/2020101201234.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:27:40] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:27:41] "GET /static/img/202152697465.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:28:30] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:29:25] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:29:26] "GET /static/img/2021526968424.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:29:51] "POST /lookup HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 263, in lookup
+    lookupimg.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formomentLookup))
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/werkzeug/datastructures.py", line 3013, in save
+    dst = open(dst, "wb")
+FileNotFoundError: [Errno 2] No such file or directory: './SVM-Classifier/Dog-Data/test/20215112951.jpg'
+61.77.60.206 - - [26/May/2021 11:29:55] "POST /lookup HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:29:56] "GET /static/img/202152697465.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:31:27] "POST /lookup HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:31:28] "GET /static/img/2021526968424.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:33:58] "POST /lookup HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 11:33:59] "GET /static/img/2020101201234.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 11:50:52] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 12:17:51] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 12:17:51] "GET /static/img/202152686.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 12:19:41] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 12:19:42] "GET /static/img/20215266.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 12:22:33] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 12:22:33] "GET /static/img/20215266.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.60.206 - - [26/May/2021 12:50:28] "POST /register HTTP/1.1" 200 -
+61.77.60.206 - - [26/May/2021 12:50:29] "GET /static/img/2021526541746.jpg HTTP/1.1" 200 -
