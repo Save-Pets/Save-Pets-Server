@@ -148,7 +148,7 @@ def main():
     # # result = result+"202151796꿍1234"+","
     # # result =result+"등록된강아지"+","
 
-    if (svm_prob < 0.65 and knn_prob < 0.55) or svm_k != knn_k:
+    if (svm_prob < 0.65 and knn_prob < 0.55) or svm_k != knn_k or knn_k=='2020720301212' or knn_k=='2020820601313':
         result =result+"a,"+"미등록강아지"+","
     else:
         result =result+svm_k+","+"등록된강아지"+","
