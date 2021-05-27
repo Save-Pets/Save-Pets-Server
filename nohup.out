@@ -1004,3 +1004,17 @@ image 5/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawi
 Results saved to runs/detect/exp2
 Done. (1.357s)
 61.77.61.43 - - [27/May/2021 12:35:15] "POST /register HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+YOLOv5  torch 1.8.1 CPU
+
+Model Summary: 224 layers, 7056607 parameters, 0 gradients
+Namespace(agnostic_nms=False, augment=False, classes=None, conf_thres=0.25, device='', exist_ok=False, img_size=640, iou_thres=0.45, name='exp', project='runs/detect', save_conf=False, save_txt=False, source='../SVM-Classifier/rawimage/20215273094939', update=False, view_img=False, weights=['../YOLOv5/best.pt'])
+Fusing layers... 
+image 1/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/20215273094939/0.jpg: 384x640 1 nose, 2 nostrilss, Done. (0.174s)
+image 2/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/20215273094939/1.jpg: 384x640 1 nose, 2 nostrilss, Done. (0.166s)
+image 3/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/20215273094939/2.jpg: 384x640 1 nose, 2 nostrilss, Done. (0.211s)
+image 4/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/20215273094939/3.jpg: 384x640 1 nose, 2 nostrilss, Done. (0.166s)
+image 5/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/20215273094939/4.jpg: 384x640 1 nose, 2 nostrilss, Done. (0.165s)
+Results saved to runs/detect/exp3
+Done. (1.005s)
+61.77.61.43 - - [27/May/2021 12:41:33] "POST /register HTTP/1.1" 200 -
