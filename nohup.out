@@ -603,3 +603,355 @@ hi
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [26/May/2021 13:00:38] "POST /register HTTP/1.1" 200 -
+106.101.0.82 - - [26/May/2021 13:00:39] "GET /static/img/202152697465.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [26/May/2021 13:43:59] "POST /lookup HTTP/1.1" 200 -
+106.101.0.82 - - [26/May/2021 13:44:01] "GET /static/img/2020101201234.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [26/May/2021 13:56:11] "POST /lookup HTTP/1.1" 200 -
+106.101.0.82 - - [26/May/2021 13:56:14] "GET /static/img/2021526541746.jpg HTTP/1.1" 304 -
+185.173.35.33 - - [26/May/2021 17:08:35] "GET / HTTP/1.0" 200 -
+209.17.96.34 - - [26/May/2021 23:43:54] "GET / HTTP/1.1" 200 -
+209.17.96.114 - - [27/May/2021 01:36:14] "GET / HTTP/1.0" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+220.127.26.124 - - [27/May/2021 02:07:07] "POST /lookup HTTP/1.1" 200 -
+220.127.26.124 - - [27/May/2021 02:07:08] "GET /static/img/2021525323333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+220.127.26.124 - - [27/May/2021 02:07:57] "POST /lookup HTTP/1.1" 200 -
+220.127.26.124 - - [27/May/2021 02:07:58] "GET /static/img/2021525323333.jpg HTTP/1.1" 304 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [27/May/2021 04:49:59] "POST /register HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 100, in register
+    shutil.copyfile(source, destination)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/shutil.py", line 121, in copyfile
+    with open(dst, 'wb') as fdst:
+FileNotFoundError: [Errno 2] No such file or directory: './SVM-Classifier/rawimage/202152759593461/0.jpg'
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+202151307
+['202152697465', '등록된강아지', '0.9028108000917117']
+202152697465
+((36, '바둑', '치와와', '2018', '여', 'profileImg/202152697465', 22, '202152697465'),)
+20215134328
+['2020101201234', '등록된강아지', '0.6083450272251455']
+등록된강아지
+2020101201234
+((31, '몽', '푸들', '2010', '남', 'profileImg/2020101201234', 19, '2020101201234'),)
+((19, '문수림', '01056501234', 'msr@gmail.com'),)
+20215135540
+['2021526541746', '등록된강아지', '0.6247620176506917']
+등록된강아지
+2021526541746
+((40, '욜로', '포메라니안', '2021', '여', 'profileImg/2021526541746', 25, '2021526541746'),)
+((25, '김두호', '01046361746', 'kdh@gmail.com'),)
+202152637
+['2021525323333', '등록된강아지', '0.6683025543769174']
+등록된강아지
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+((20, '이해석', '01022223333', 'haeok@gmail.com'),)
+202152726
+['2021525323333', '등록된강아지', '0.6457852565695551']
+등록된강아지
+2021525323333
+((33, '왕코', '치와와', '2018', '여', 'profileImg/2021525323333', 20, '2021525323333'),)
+((20, '이해석', '01022223333', 'haeok@gmail.com'),)
+2021544928
+['a', '미등록강아지', '0.4989058863476026']
+hi
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [27/May/2021 04:55:30] "POST /register HTTP/1.1" 200 -
+106.101.0.82 - - [27/May/2021 04:55:33] "GET /static/img/2020101201234.jpg HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+106.101.0.82 - - [27/May/2021 04:56:39] "POST /lookup HTTP/1.1" 200 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+python: can't open file '../YOLOv5/detect.py': [Errno 2] No such file or directory
+106.101.0.82 - - [27/May/2021 04:58:36] "POST /register HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 108, in register
+    os.system('python ../YOLOv5/detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25') %(reg_num)
+TypeError: unsupported operand type(s) for %: 'int' and 'str'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 111, in register
+    return jsonify({'messgae:fail'})
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 348, in jsonify
+    f"{dumps(data, indent=indent, separators=separators)}\n",
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 56, in default
+    return super().default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+2021545458
+['2020101201234', '등록된강아지', '0.8070159414673252']
+2020101201234
+((31, '몽', '푸들', '2010', '남', 'profileImg/2020101201234', 19, '2020101201234'),)
+202154568
+['a', '미등록강아지', '0.32687133586030315']
+미등록강아지
+202154585
+['a', '미등록강아지', '0.40311055431580856']
+hi
+[등록] 미등록 강아지 yolo 코드 예외 발생
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+sh: line 0: cd: ../YOLOv5: No such file or directory
+106.101.0.82 - - [27/May/2021 05:14:32] "POST /register HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 108, in register
+    os.system('cd ../YOLOv5 && python detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25') %(reg_num)
+TypeError: unsupported operand type(s) for %: 'int' and 'str'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 111, in register
+    return jsonify({'messgae:fail'})
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 348, in jsonify
+    f"{dumps(data, indent=indent, separators=separators)}\n",
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 56, in default
+    return super().default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+2021551358
+['a', '미등록강아지', '0.3951031249594881']
+hi
+[등록] 미등록 강아지 yolo 코드 예외 발생
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+Traceback (most recent call last):
+  File "detect.py", line 6, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+106.101.0.82 - - [27/May/2021 05:17:04] "POST /register HTTP/1.1" 500 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+Traceback (most recent call last):
+  File "detect.py", line 6, in <module>
+    import torch
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/__init__.py", line 195, in <module>
+    _load_global_deps()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/__init__.py", line 148, in _load_global_deps
+    ctypes.CDLL(lib_path, mode=ctypes.RTLD_GLOBAL)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/ctypes/__init__.py", line 364, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: /home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/lib/libtorch_global_deps.so: cannot open shared object file: No such file or directory
+Traceback (most recent call last):
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 108, in register
+    os.system('cd YOLOv5 && python detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25') %(reg_num)
+TypeError: unsupported operand type(s) for %: 'int' and 'str'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 111, in register
+    return jsonify({'messgae:fail'})
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 348, in jsonify
+    f"{dumps(data, indent=indent, separators=separators)}\n",
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 56, in default
+    return super().default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable
+106.101.0.82 - - [27/May/2021 05:29:36] "POST /register HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 108, in register
+    os.system('cd YOLOv5 && python detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25') %(reg_num)
+TypeError: unsupported operand type(s) for %: 'int' and 'str'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 111, in register
+    return jsonify({'messgae:fail'})
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 348, in jsonify
+    f"{dumps(data, indent=indent, separators=separators)}\n",
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 129, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/json/__init__.py", line 56, in default
+    return super().default(o)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type set is not JSON serializable
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+2021551632
+['a', '미등록강아지', '0.5889532948525453']
+hi
+[등록] 미등록 강아지 yolo 코드 예외 발생
+202155293
+['a', '미등록강아지', '0.5038781246053144']
+hi
+[등록] 미등록 강아지 yolo 코드 예외 발생
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+Traceback (most recent call last):
+  File "detect.py", line 6, in <module>
+    import torch
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/__init__.py", line 195, in <module>
+    _load_global_deps()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/__init__.py", line 148, in _load_global_deps
+    ctypes.CDLL(lib_path, mode=ctypes.RTLD_GLOBAL)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/ctypes/__init__.py", line 364, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: /home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/lib/libtorch_global_deps.so: cannot open shared object file: No such file or directory
+106.101.0.82 - - [27/May/2021 05:39:26] "POST /register HTTP/1.1" 200 -
+106.101.0.82 - - [27/May/2021 05:39:27] "GET /static/img/202152726687548.jpg HTTP/1.1" 200 -
+ * Serving Flask app 'main' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.31.34.126:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+61.77.61.43 - - [27/May/2021 11:56:00] "POST /lookup HTTP/1.1" 200 -
+61.77.61.43 - - [27/May/2021 11:56:45] "GET /static/img/2021525493333.jpg HTTP/1.1" 200 -
+61.77.61.43 - - [27/May/2021 11:56:46] "GET /favicon.ico HTTP/1.1" 404 -
+61.77.61.43 - - [27/May/2021 11:59:41] "POST /register HTTP/1.1" 500 -
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+YOLOv5  torch 1.8.1 CPU
+
+Namespace(agnostic_nms=False, augment=False, classes=None, conf_thres=0.25, device='', exist_ok=False, img_size=640, iou_thres=0.45, name='exp', project='runs/detect', save_conf=False, save_txt=False, source='rawimage/202152731344939', update=False, view_img=False, weights=['../YOLOv5/best.pt'])
+Traceback (most recent call last):
+  File "detect.py", line 188, in <module>
+    detect()
+  File "detect.py", line 33, in detect
+    model = attempt_load(weights, map_location=device)  # load FP32 model
+  File "/home/ec2-user/capstone/Save-Pets-Server/YOLOv5/models/experimental.py", line 118, in attempt_load
+    model.append(torch.load(w, map_location=map_location)['model'].float().fuse().eval())  # load FP32 model
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/serialization.py", line 579, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '../YOLOv5/best.pt'
+Traceback (most recent call last):
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2069, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2054, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 2051, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1501, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1499, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/flask/app.py", line 1485, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ec2-user/capstone/Save-Pets-Server/main.py", line 39, in register
+    profile = request.files['dogProfile']
+  File "/home/ec2-user/miniconda3/envs/savepets/lib/python3.7/site-packages/werkzeug/datastructures.py", line 377, in __getitem__
+    raise exceptions.BadRequestKeyError(key)
+werkzeug.exceptions.BadRequestKeyError: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+KeyError: 'dogProfile'
+61.77.61.43 - - [27/May/2021 12:00:33] "POST /register HTTP/1.1" 200 -
