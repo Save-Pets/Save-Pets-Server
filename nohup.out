@@ -955,3 +955,52 @@ Traceback (most recent call last):
 werkzeug.exceptions.BadRequestKeyError: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
 KeyError: 'dogProfile'
 61.77.61.43 - - [27/May/2021 12:00:33] "POST /register HTTP/1.1" 200 -
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/YOLOv5/models/experimental.py', reloading
+20215115540
+['2021525493333', '등록된강아지', '0.6979249555405402']
+등록된강아지
+2021525493333
+((34, '오리', '진돗개', '2017', '여', 'profileImg/2021525493333', 20, '2021525493333'),)
+((20, '이해석', '01022223333', 'haeok@gmail.com'),)
+2021512011
+['a', '미등록강아지', '0.30672182960037375']
+hi
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+YOLOv5  torch 1.8.1 CPU
+
+Model Summary: 224 layers, 7056607 parameters, 0 gradients
+Namespace(agnostic_nms=False, augment=False, classes=None, conf_thres=0.25, device='', exist_ok=False, img_size=640, iou_thres=0.45, name='exp', project='runs/detect', save_conf=False, save_txt=False, source='rawimage/202152735744939', update=False, view_img=False, weights=['../YOLOv5/best.pt'])
+Fusing layers... 
+Traceback (most recent call last):
+  File "detect.py", line 188, in <module>
+    detect()
+  File "detect.py", line 55, in detect
+    dataset = LoadImages(source, img_size=imgsz, stride=stride)
+  File "/home/ec2-user/capstone/Save-Pets-Server/YOLOv5/utils/datasets.py", line 132, in __init__
+    raise Exception(f'ERROR: {p} does not exist')
+Exception: ERROR: /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/rawimage/202152735744939 does not exist
+61.77.61.43 - - [27/May/2021 12:27:37] "POST /register HTTP/1.1" 200 -
+ * Detected change in '/home/ec2-user/capstone/Save-Pets-Server/main.py', reloading
+20215122715
+['a', '미등록강아지', '0.30672182960037375']
+hi
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 498-642-075
+[ WARN:0] global /tmp/pip-req-build-yw7uvgqm/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp (13) SIFT_create DEPRECATED: cv.xfeatures2d.SIFT_create() is deprecated due SIFT tranfer to the main repository. https://github.com/opencv/opencv/issues/16736
+YOLOv5  torch 1.8.1 CPU
+
+Model Summary: 224 layers, 7056607 parameters, 0 gradients
+Namespace(agnostic_nms=False, augment=False, classes=None, conf_thres=0.25, device='', exist_ok=False, img_size=640, iou_thres=0.45, name='exp', project='runs/detect', save_conf=False, save_txt=False, source='../SVM-Classifier/rawimage/202152712644939', update=False, view_img=False, weights=['../YOLOv5/best.pt'])
+Fusing layers... 
+image 1/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/202152712644939/0.jpg: 512x640 1 nose, 2 nostrilss, Done. (0.301s)
+image 2/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/202152712644939/1.jpg: 512x640 1 nose, 2 nostrilss, Done. (0.221s)
+image 3/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/202152712644939/2.jpg: 512x640 1 nose, 2 nostrilss, Done. (0.262s)
+image 4/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/202152712644939/3.jpg: 512x640 1 nose, 2 nostrilss, Done. (0.221s)
+image 5/5 /home/ec2-user/capstone/Save-Pets-Server/YOLOv5/../SVM-Classifier/rawimage/202152712644939/4.jpg: 512x640 1 nose, 2 nostrilss, Done. (0.219s)
+Results saved to runs/detect/exp2
+Done. (1.357s)
+61.77.61.43 - - [27/May/2021 12:35:15] "POST /register HTTP/1.1" 200 -

@@ -105,7 +105,7 @@ def register():
         dogNose5.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'4.jpg')
 
         try:
-            os.system('cd YOLOv5 && python detect.py --source rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25' %(reg_num))
+            os.system('cd YOLOv5 && python detect.py --source ../SVM-Classifier/rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25' %(reg_num))
         except Exception as e:
             print("[등록] 미등록 강아지 yolo 코드 예외 발생")
             return jsonify({'messgae:fail'})
