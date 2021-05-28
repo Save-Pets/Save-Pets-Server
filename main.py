@@ -106,7 +106,7 @@ def register():
         createFolder('./SVM-Classifier/image/%s' %(reg_num))
         createFolder('./SVM-Classifier/rawimage/%s' %(reg_num))
         #이미지 5장, key = filename[] 저장 for preprocess
-        source = './SVM-Classifier/testimage/%s/%s.jpg' %str(formoment) %str(formoment)
+        source = './SVM-Classifier/testimage/%s/%s.jpg' %(formoment1,formoment1)
         destination = './SVM-Classifier/rawimage/%s/0.jpg' %(reg_num)
         shutil.copyfile(source, destination)
         dogNose2.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'1.jpg')
@@ -313,7 +313,7 @@ def lookup():
 
                 foundDog=SVMresult[0]
                 accurancy=SVMresult[2]
-                accurancy1=round(float(accurancy),2)*100
+                accurancy1=round(float(accurancy),4)*100
                 accurancy1 = str(accurancy1)
                 print(foundDog)
                 lookup_sql = "SELECT * FROM pet WHERE uniquenumber='%s'" %(foundDog)

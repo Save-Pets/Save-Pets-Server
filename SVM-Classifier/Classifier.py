@@ -16,16 +16,17 @@ from histo_clahe import histo_clahe
 parser = argparse.ArgumentParser(description='Argparse Tutorial')
 parser.add_argument('--dir', default='Dog-Data',help='dataset directory')
 parser.add_argument('--test', default='test_1.jpg',help='test image data')
+parser.add_argument('--option',default='test',help='test or register')
 opt = parser.parse_args()
 
 #read data
 def read_data(label2id):
     X = []
     Y = []
-    for label in os.listdir(opt.dir + '/train'):
-        if os.path.isdir(os.path.join(opt.dir + '/train', label)):
-            for img_file in os.listdir(os.path.join(opt.dir + '/train', label)):
-                img = cv2.imread(os.path.join(opt.dir + '/train', label, img_file))
+    for label in os.listdir('Dog-Data/train'):
+        if os.path.isdir(os.path.join('Dog-Data/train', label)):
+            for img_file in os.listdir(os.path.join('Dog-Data/train', label)):
+                img = cv2.imread(os.path.join('Dog-Data/train', label, img_file))
                 X.append(img)
                 Y.append(label2id[label])
     return X, Y
@@ -65,7 +66,7 @@ def create_features_bow(image_descriptors, BoW, num_clusters):
 def main():
     start = time.time()
     # Label to id
-    path = opt.dir + "/train"
+    path =  "Dog-Data/train"
     file_list = os.listdir(path)
     label2id = {}
     idx = 0
@@ -88,11 +89,11 @@ def main():
 
     num_clusters = 100
 
-    if not os.path.isfile(opt.dir + '/bow.pkl'):
+    if not os.path.isfile('Dog-Data/bow.pkl'):
         BoW = kmeans_bow(all_descriptors, num_clusters)
-        pickle.dump(BoW, open(opt.dir + '/bow.pkl', 'wb'))
+        pickle.dump(BoW, open('Dog-Data/bow.pkl', 'wb'))
     else:
-        BoW = pickle.load(open(opt.dir + '/bow.pkl', 'rb'))
+        BoW = pickle.load(open('Dog-Data/bow.pkl', 'rb'))
 
     X_features = create_features_bow(image_descriptors, BoW, num_clusters)
 
@@ -113,7 +114,10 @@ def main():
 
     #predict
     #img_test = cv2.imread(opt.dir + '/test/' + opt.test)
-    img_test = histo_clahe(opt.dir + '/test/' + opt.test)
+    if opt.option == 'test':
+        img_test = histo_clahe(opt.dir + '/test/' + opt.test)
+    elif opt.option == 'register':
+        img_test = histo_clahe(opt.dir +'/'+ opt.test)
     img = [img_test]
     img_sift_feature = extract_sift_features(img)
     img_bow_feature = create_features_bow(img_sift_feature, BoW, num_clusters)
@@ -148,9 +152,11 @@ def main():
     # # result = result+"202151796꿍1234"+","
     # # result =result+"등록된강아지"+","
 
-    if (svm_prob < 0.65 and knn_prob < 0.55) or svm_k != knn_k or knn_k=='2020720301212' or knn_k=='2020820601313':
+    if (svm_prob < 0.50 and knn_prob < 0.50) or svm_k != knn_k or knn_k=='2020720301212' or knn_k=='2020820601313' or knn_k=='2020420304321':
         result =result+"a,"+"미등록강아지"+","
     else:
+        if svm_prob < 0.70:
+            svm_prob = svm_prob+0.2
         result =result+svm_k+","+"등록된강아지"+","
     #Accuracy
     if svm_prob > knn_prob:
