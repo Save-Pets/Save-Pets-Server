@@ -39,13 +39,23 @@ def register():
         profile = request.files['dogProfile']
         forlookup = request.files['dogNose1']
 
-    try:
         now = datetime.datetime.now()
-        formoment = str(now.year)+str(now.month)+str(now.hour)+str(now.minute)+str(now.second)
-        print(formoment)
-        forlookup.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment))
+        formoment = str(now.year) + str(now.month) + str(now.hour) + str(now.minute) + str(now.second)
+        formoment1 = str(formoment)
+        print(formoment1)
+
+    try:
+        # for yolov5
+        createFolder('./SVM-Classifier/testimage/%s' %(formoment1))
+        forlookup.save('./SVM-Classifier/testimage/%s/%s.jpg' %(formoment1,formoment1))
+        os.system('cd YOLOv5 && python ../YOLOv5/detect.py --source ../SVM-Classifier/testimage/%s --weights ../YOLOv5/best.pt --option test --conf 0.25' %(formoment1))
+    except Exception as e1:
+        print("[등록시 조회] yolov5 코드가 안돌아가서 실패",e1)
+        return jsonify({'message':'fail'})
+
+    try:
         #5장 중 1장만 ml코드 돌리기
-        result = getSVMResultForRegister(formoment)
+        result = getSVMResultForRegister(formoment1)
         compare = result.decode('utf-8').split(',')
         print(compare)
         if compare ==['']:
@@ -96,7 +106,7 @@ def register():
         createFolder('./SVM-Classifier/image/%s' %(reg_num))
         createFolder('./SVM-Classifier/rawimage/%s' %(reg_num))
         #이미지 5장, key = filename[] 저장 for preprocess
-        source = './SVM-Classifier/Dog-Data/test/%s.jpg' %str(formoment)
+        source = './SVM-Classifier/testimage/%s/%s.jpg' %str(formoment) %str(formoment)
         destination = './SVM-Classifier/rawimage/%s/0.jpg' %(reg_num)
         shutil.copyfile(source, destination)
         dogNose2.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'1.jpg')
@@ -105,7 +115,8 @@ def register():
         dogNose5.save('./SVM-Classifier/rawimage/%s/' %(reg_num) +'4.jpg')
 
         try:
-            os.system('cd YOLOv5 && python detect.py --source ../SVM-Classifier/rawimage/%s --weights ../YOLOv5/best.pt --conf 0.25' %(reg_num))
+            os.system('cd YOLOv5 && python ../YOLOv5/detect.py --source ../SVM-Classifier/rawimage/%s --weights ../YOLOv5/best.pt --option register --conf 0.25' %(reg_num))
+
         except Exception as e:
             print("[등록] 미등록 강아지 yolo 코드 예외 발생")
             return jsonify({'messgae:fail'})
@@ -266,11 +277,21 @@ def lookup():
         lookupimg=request.files['dogNose']
         now1=datetime.datetime.now()
         formomentLookup = str(now1.year) + str(now1.month) + str(now1.hour) + str(now1.minute) + str(now1.second)
+        formomentLookup1 = str(formomentLookup)
         print(formomentLookup)
-        lookupimg.save('./SVM-Classifier/Dog-Data/test/%s.jpg' %str(formomentLookup))
+        
+        #Yolov5
+        try:
+            createFolder('./SVM-Classifier/testimage/%s' %(formomentLookup1))
+            lookupimg.save('./SVM-Classifier/testimage/%s/%s.jpg' %(formomentLookup1,formomentLookup1))
+            os.system('cd YOLOv5 && python detect.py --source ../SVM-Classifier/testimage/%s --weights ../YOLOv5/best.pt --option test --conf 0.25' %(formomentLookup1))
+
+        except Exception as e1:
+            print("[조회]yolov5가 작동하지 않아 조회가 되지 않습니다",e1)
+            return jsonify({'message':'fail'})
 
         try:
-            result= getSVMResult(formomentLookup)
+            result= getSVMResult(formomentLookup1)
             SVMresult=result.decode('utf-8').split(',')
             if SVMresult==['']:
                 raise Exception('attribute error')
