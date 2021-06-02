@@ -42,20 +42,19 @@
 </br>
 
 #### 1) Backend API 구현 로직 - 등록 & 조회
-
-- 강아지 비문 등록  
+ 
 [Registration API Logic]   
 Client에서 비문사진(5장) 전송 -> 서버에서 preprocess 과정-> 5장 중 1장으로 이미 등록된 강아지인지 classification 실행 -> (미등록 강아지일 경우) database에 사용자 및 강아지정보 등록 & client에 "등록 성공" message 전달 or (등록된 강아지일경우) client에 "이미 등록된 강아지" message 전달
 
-Frontend로 부터 받은 5장의 사진을 EC2 서버에 저장한 후에 classification을 실행하는 로직은 결과값이 Database에 저장되어 있지 않기 때문에 예외가 발생합니다. 따라서 조회를 위한 사진은 따로 미리 저장해놓는 방식을 택했습니다.   
+- Frontend로 부터 받은 5장의 사진을 EC2 서버에 저장한 후에 classification을 실행하는 로직은 결과값이 Database에 저장되어 있지 않기 때문에 예외가 발생합니다. 따라서 조회를 위한 사진은 따로 미리 저장해놓는 방식을 택했습니다.   
 
-이외에도 사용자(부모테이블)가 여러마리의 강아지(자식테이블)를 등록할 수 있기 때문에 사용자의 핸드폰 번호가 database에 등록되어 있는 경우엔 사용자가 이중 등록 되지 않으며 두 테이블은 Foreign key로 연결되어 있습니다.   
+- 이외에도 사용자(부모테이블)가 여러마리의 강아지(자식테이블)를 등록할 수 있기 때문에 사용자의 핸드폰 번호가 database에 등록되어 있는 경우엔 사용자가 이중 등록 되지 않으며 두 테이블은 Foreign key로 연결되어 있습니다.   
 
-- 강아지 비문 조회  
+ 
 [Lookup API Logic]    
 Client에서 비문사진(1장) 전송 -> 서버에서 classification 과정 -> (등록된 강아지일 경우)database에서 고유값 select & client에 사용자 및 강아지정보 전달 or (미등록 강아지일 경우) client에 "미등록 강아지" message 전달
  
-조회가 성공한 경우엔 uniqueue number를 반환하고 uniqueue number는 등록된서버시간+등록된강아지이름초성+사용자핸드폰번호뒷자리 로 만들어지기 때문에 중복되지 않습니다.  
+- 조회가 성공한 경우엔 uniqueue number를 반환하고 uniqueue number는 "등록된서버시간+등록된강아지이름초성+사용자핸드폰번호뒷자리" 로 만들어지기 때문에 중복되지 않습니다.  
 
 <img width="1214" alt="스크린샷 2021-06-03 오전 12 08 53" src="https://user-images.githubusercontent.com/42709887/120505687-2da89880-c400-11eb-8277-e2dcf05ce060.png">
 
