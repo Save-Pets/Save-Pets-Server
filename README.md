@@ -31,7 +31,7 @@
 * **Server**
   * Flask 2.0.0
   * python 3.7.2
-  * AWS EC2 
+  * AWS EC2 - t2.medium
   * Database(MySQL,radis)
   * Celery
 * **Machine Learning**
