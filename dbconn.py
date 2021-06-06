@@ -5,7 +5,7 @@ class Database():
         self.db = pymysql.connect(host='localhost',
                                   user='root',
                                   password='anstnfla25',
-                                  db='savepets',
+                                  db='savepet',
                                   charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
 
