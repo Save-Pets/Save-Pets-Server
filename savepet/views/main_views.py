@@ -8,6 +8,7 @@ import subprocess
 import pymysql
 
 
+
 bp= Blueprint('main',__name__,url_prefix='/')
 
 
